@@ -1,0 +1,26 @@
+header ul {
+  background-color: #394433;
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+header ul li {
+  float: left;
+}
+
+header ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+header ul li a:hover {
+  background-color: black;
+}
+.active {
+  background-color: green;
+}
