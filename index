@@ -1,1 +1,54 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>WG-Planer</title>
+    <link rel="stylesheet" href="appCeline.css" />
+    <script src="javascriptCeline.js"></script>
+    <h1>Neue Aufgabe anlegen</h1>
+  </head>
+  <body>
+    <form action="select.html">
+      <label>Aufgabe:
+        <input type="text" name="aufg" list="aufg">
+          <datalist id="aufg">
+            <option value="Bad putzen"/>
+            <option value="Küche putzen"/>
+            <option value="Wohnzimmer aufräumen"/>
+            <option value="einkaufen"/>
+            <option value="kochen"/>
+            <option value="Rechnungen bezahlen"/>
+          </datalist>
+        </input>
+      </label>
+      <br>
+      <label>Beschreibung:
+        <input type="text" name="beschr">
+      </label>
+      <br>
+      <label for="zst">Zuständig:
+        <input id="zst" name="zuständig">
+      </label>
+      <br>
+      <input type="radio" id="sdringend" name="dringlichkeit" value="0">
+      <label id="rb" for="sdringend">sehr dringend</label>
+      <input type="radio" id="dringend" name="dringlichkeit" value="1">
+      <label id="rb" for="dringend">dringend</label>
+      <input type="radio" id="ndringend" name="dringlichkeit" value="2">
+      <label id="rb" for="ndringend">nicht dringend</label>
+      <br>
+      <label for="erld">Erledigen bis:
+        <input type="date" min="2019-11-17" max="2080-12-31" id="erld" name="erledigtBis">
+      </label>
+      <br>
+      <button type="button">Aufgabe anlegen</button>
+    </form>
+
+
+
+
+  </body>
+
+
+</html>
+</html>
