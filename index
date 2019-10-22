@@ -3,46 +3,90 @@
   <head>
     <meta charset="utf-8" />
     <title>WG-Planer</title>
+
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="app.css" />
+
+    <script src="Aufgabenverteilung.js"></script>
+    <link rel="stylesheet" href="style.css" />
+
     <link rel="stylesheet" href="appCeline.css" />
     <script src="javascriptCeline.js"></script>
+
+    <script>
+        window.addEventListener("load", () => {
+            let pages = [
+                {
+                    name: "Aufgabenverteilung",              // Name zum Aufrufen der Seite
+                    klass: Aufgabenverteilung,                // Klasse, die die Seite bereitstellt
+                    label: "Aufgabenverteilung",             // Bezeichnung der Seite
+                    hidden: false,                  // Seite kann im Menü ausgewählt werden
+                },
+                {
+                    name: "javascriptCeline",
+                    klass: javascriptCeline,
+                    label: "Aufgabe hinzufügen",
+                    hidden: false,                  // Seite kann im Menü ausgewählt werden
+                },
+
+            ];
+
+            let app = new App(pages);
+            app.showPage("Aufgabenverteilung");
+        });
+    </script>
     <h1>Neue Aufgabe anlegen</h1>
   </head>
+  <html>
+  <ul>
+    <li>>Aufgabenverteilung</a></li>
+    <li><a href="">Aufgabe anlegen</a></li>
+    <li><a href="">Einkaufsliste</a></li>
+  </ul>
   <body>
-    <form action="select.html">
-      <label>Aufgabe:
-        <input type="text" name="aufg" list="aufg">
-          <datalist id="aufg">
-            <option value="Bad putzen"/>
-            <option value="Küche putzen"/>
-            <option value="Wohnzimmer aufräumen"/>
-            <option value="einkaufen"/>
-            <option value="kochen"/>
-            <option value="Rechnungen bezahlen"/>
-          </datalist>
-        </input>
-      </label>
-      <br>
-      <label>Beschreibung:
-        <input type="text" name="beschr">
-      </label>
-      <br>
-      <label for="zst">Zuständig:
-        <input id="zst" name="zuständig">
-      </label>
-      <br>
-      <input type="radio" id="sdringend" name="dringlichkeit" value="0">
-      <label id="rb" for="sdringend">sehr dringend</label>
-      <input type="radio" id="dringend" name="dringlichkeit" value="1">
-      <label id="rb" for="dringend">dringend</label>
-      <input type="radio" id="ndringend" name="dringlichkeit" value="2">
-      <label id="rb" for="ndringend">nicht dringend</label>
-      <br>
-      <label for="erld">Erledigen bis:
-        <input type="date" min="2019-11-17" max="2080-12-31" id="erld" name="erledigtBis">
-      </label>
-      <br>
-      <button type="button">Aufgabe anlegen</button>
-    </form>
+    <main>
+      <p>Aufgabenverteilung</p>
+      <ul id="aufgabenliste">
+     </ul>
+    </main>
+    <main>
+      <form action="select.html">
+        <label>Aufgabe:
+          <input type="text" name="aufg" list="aufg">
+            <datalist id="aufg">
+              <option value="Bad putzen"/>
+              <option value="Küche putzen"/>
+              <option value="Wohnzimmer aufräumen"/>
+              <option value="einkaufen"/>
+              <option value="kochen"/>
+              <option value="Rechnungen bezahlen"/>
+            </datalist>
+          </input>
+        </label>
+        <br>
+        <label>Beschreibung:
+          <input type="text" name="beschr">
+        </label>
+        <br>
+        <label for="zst">Zuständig:
+          <input id="zst" name="zuständig">
+        </label>
+        <br>
+        <input type="radio" id="sdringend" name="dringlichkeit" value="0">
+        <label id="rb" for="sdringend">sehr dringend</label>
+        <input type="radio" id="dringend" name="dringlichkeit" value="1">
+        <label id="rb" for="dringend">dringend</label>
+        <input type="radio" id="ndringend" name="dringlichkeit" value="2">
+        <label id="rb" for="ndringend">nicht dringend</label>
+        <br>
+        <label for="erld">Erledigen bis:
+          <input type="date" min="2019-11-17" max="2080-12-31" id="erld" name="erledigtBis">
+        </label>
+        <br>
+        <button type="button">Aufgabe anlegen</button>
+      </form>
+    </main>
+
 
 
 
