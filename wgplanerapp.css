@@ -1,0 +1,58 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-family: "Rubik", sans-serif;
+    font-size: 10pt;
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none;
+}
+
+
+html {
+    font-size: 11pt;
+}
+
+main {
+    max-width: 40em;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/** Navigationsleiste **/
+header ul {
+  background-color: #394433;
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+header ul li {
+  float: left;
+}
+
+header ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+header ul li a:hover {
+  background-color: black;
+}
+
+.active {
+  background-color: green;
+}

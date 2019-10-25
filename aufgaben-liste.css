@@ -1,0 +1,43 @@
+ #aufgabenliste{
+   list-style-type: none;
+   padding: 0;
+ }
+
+ .todobox {
+   border: 1px solid black;
+   border-radius: 5px;
+   margin: 10px;
+ }
+
+ .todoheader {
+   border-bottom: 1px solid black;
+   list-style-type: none;
+   overflow: hidden;
+   padding: 4px;
+   margin: 0;
+ }
+
+ .todoheader li {
+   float: left;
+   margin-left: 0px;
+   margin-right: 4px;
+ }
+
+ .todofooter {
+   border: none;
+   list-style-type: none;
+   overflow: hidden;
+   padding: 4px;
+   margin: 0;
+ }
+
+ .close {
+   float: right;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+
+ .close:hover {
+   background-color: #f34435;
+   color: white;
+ }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>WG-Planer</title>
+
+        <!-- Klasse WGPlanerApp: Steuert die gesamte Anwendung -->
+        <script src="wgplanerapp.js"></script>
+        <link rel="stylesheet" href="wgplanerapp.css" />
+
+        <!-- Klasse AufgabenListe: Listet alle Aufgaben auf -->
+        <script src="aufgaben-liste.js"></script>
+        <link rel="stylesheet" href="aufgaben-liste.css" />
+
+        <!-- Klasse AufgabeAnlegen: Wird benötigt um Aufgaben anzulegen aber auch um bereits erstellte zu bearbeiten -->
+        <script src="aufgabe-anlegen.js"></script>
+        <link rel="stylesheet" href="aufgabe-anlegen.css" />
+
+        <!-- Klasse todo: Listet eine Einkaufsliste auf und gibt Möglichkeiten zur Bearbeitung -->
+
+        <script>
+            window.addEventListener("load", () => {
+                let pages = [
+                    {
+                        name: "aufgaben-liste",
+                        klass: AufgabenListe,
+                        label: "To do",
+                        hidden: false,
+                    },
+                    {
+                        name: "aufgabe-anlegen",
+                        klass: AufgabeAnlegen,
+                        label: "Aufgabe hinzufügen",
+                        hidden: false,
+                    },
+                    {
+                        name: "aufgabe-bearbeiten",
+                        klass: AufgabeAnlegen,
+                        label: "Aufgabe bearbeiten",
+                        hidden: true,
+                    }
+                    <!--todo: seite für einkaufsliste hinzufügen-->
+                ];
+
+                let app = new WGPlanerApp(pages);
+                app.showPage("aufgaben-liste");
+            });
+        </script>
+    </head>
+    <body>
+      <header id = "wgplanerapp-header">
+        <ul>
+        </ul>
+      </header>
+    </body>
+    <html>
+        <!-- Elemente der Navigationsleiste -->
+        <template id="vorlage-wgplanerapp-menu-li">
+            <li data-page-name="$NAME$">
+                <a>$LABEL$</a>
+            </li>
+        </template>
+
+        <!-- Seite: AufgabenListe -->
+        <main id="vorlage-aufgaben-liste">
+          <p>Aufgabenverteilung:</p>
+          <ul id="aufgabenliste">
+          </ul>
+        </main>
+
+        <template id="vorlage-aufgaben-liste-leer">
+            <li>
+                <div class="name">
+                    Keine Aufgaben zu tun, habe einen schönen Tag:)
+                </div>
+            </li>
+        </template>
+
+        <!-- Seite: Adresse anlegen/bearbeiten -->
+        <main id="main-aufgabe-bearbeiten" class="hidden">
+        </main>
+
+        <template id="vorlage-aufgabe-bearbeiten">
+            <div>
+                <div class="form">
+                    <input class="aufgabe" placeholder="Aufgabe" value="$AUFGABE$" />
+                    <input class="beschreibung" placeholder="Beschreibung" value="$BESCHREIBUNG$" />
+                    <input class="zustaendig" placeholder="Zuständig" value="$ZUSTAENDIG$" />
+                    <input class="dringlichkeit" placeholder="Dringlichkeit" value="$DRINGLICHKEIT$" />
+                    <input class="datum" placeholder="Erledigen bis" value="$DATUM$" />
+                </div>
+                <div class="actions">
+                    <div class="action save">
+                        <a>Aufgabe speichern</a>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </html>
+</html>
