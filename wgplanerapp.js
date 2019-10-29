@@ -7,37 +7,24 @@ class WGPlanerApp {
         this._pages = pages;
         this._currentPageObject = null;
 
-        // todo: ersetzen, vlt durch Zugriff auf browser cache?
-        this._data = [
-            {
-                aufgabe: "Küche putzen",
-                beschreibung: "Bitte Geschirrspülmaschine einräumen und Kühlschrank ausräumen",
-                zustaendig: "Selina",
-                dringlichkeit: "1",
-                datum: "24.12.2019"
-            },
-            {
-                aufgabe: "Küche putzen",
-                beschreibung: "Bitte Geschirrspülmaschine einräumen und Kühlschrank ausräumen",
-                zustaendig: "Selina",
-                dringlichkeit: "2",
-                datum: "24.12.2019"
-            },
-            {
-                aufgabe: "Küche putzen",
-                beschreibung: "Bitte Geschirrspülmaschine einräumen und Kühlschrank ausräumen",
-                zustaendig: "Selina",
-                dringlichkeit: "3",
-                datum: "24.12.2019"
-            },
-            {
-                aufgabe: "Küche putzen",
-                beschreibung: "Bitte Geschirrspülmaschine einräumen und Kühlschrank ausräumen",
-                zustaendig: "Selina",
-                dringlichkeit: "",
-                datum: "24.12.2019"
-            },
-        ];
+        let browserCache = localStorage['wgplaner-daten'];
+        this._data = JSON.parse(browserCache);
+
+        if (this._data && this._data.length) {
+          // Erfolgreiches Laden der Daten des Browsers
+        }
+        else {
+          // Laden nicht erfolgreich, deshalb wird eine Beispielsaufgabe erstellt
+          this._data = [
+             {
+                 aufgabe: "Küche putzen",
+                 beschreibung: "Bitte Geschirrspülmaschine einräumen und Kühlschrank ausräumen",
+                 zustaendig: "Selina",
+                 dringlichkeit: "1",
+                 datum: "24.12.2019"
+             }
+           ];
+        }
 
         // Interne Methode zum Rendern des Menüs aufrufen
         this._renderMenu();
@@ -129,7 +116,7 @@ class WGPlanerApp {
      */
     updateDataByIndex(index, dataset) {
         this._data[index] = dataset;
-        // todo: update browser cache?
+        localStorage['wgplaner-daten'] = JSON.stringify(this._data);
     }
 
     /**
@@ -140,7 +127,7 @@ class WGPlanerApp {
      */
     deleteDataByIndex(index) {
         this._data.splice(index, 1);
-        // todo: update browser cache?
+        localStorage['wgplaner-daten'] = JSON.stringify(this._data);
     }
 
     /**
@@ -151,7 +138,7 @@ class WGPlanerApp {
      */
     appendData(dataset) {
         this._data.push(dataset);
+        localStorage['wgplaner-daten'] = JSON.stringify(this._data);
         return this._data.length - 1;
-        // todo: update browser cache?
     }
 }
