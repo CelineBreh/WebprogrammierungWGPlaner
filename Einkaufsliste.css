@@ -1,0 +1,92 @@
+header ul {
+  background-color: #394433;
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+header ul li {
+  float: left;
+}
+
+header ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+header ul li a:hover {
+  background-color: black;
+}
+.active {
+  background-color: green;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+#list {
+  display: inherit;
+  border-radius: 1em;
+  padding: 1em;
+    margin-bottom: 2ex;
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+}
+/* Set all odd list items to a different color (zebra-stripes) */
+#list :nth-child(odd) {
+  background: #f9f9f9;
+  }
+
+
+#nameL {
+  margin: 0;
+  border-radius: 0;
+  width: 50%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+.label{
+
+  border-radius: 0;
+  width: 100%;
+
+
+  font-size: 16px;
+}
+.checkbox{
+
+
+
+}
+.remove{
+    float: right;
+  right: 0;
+  top: 0;
+}

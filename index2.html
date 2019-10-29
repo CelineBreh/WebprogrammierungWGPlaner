@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="aufgabe-anlegen.css" />
 
         <!-- Klasse todo: Listet eine Einkaufsliste auf und gibt Möglichkeiten zur Bearbeitung -->
+        <script scr="Einkaufsliste.js"></script>
+        <link rel="stylesheet" href="Einkaufsliste.css" />
 
         <script>
             window.addEventListener("load", () => {
@@ -33,6 +35,7 @@
                         label: "Aufgabe hinzufügen",
                         hidden: false,
                     },
+
                     {
                         name: "aufgabe-bearbeiten",
                         klass: AufgabeAnlegen,
@@ -40,6 +43,8 @@
                         hidden: true,
                     }
                     <!--todo: seite für einkaufsliste hinzufügen-->
+
+
                 ];
 
                 let app = new WGPlanerApp(pages);
@@ -95,6 +100,15 @@
                     </div>
                 </div>
             </div>
+        </template>
+        <template id="vorlage-einkaufsliste">
+          <p>Einkaufsliste</p>
+          <div id="list">
+          </div>
+          <label>
+            <input type="text" id="nameL" >
+          </label>
+          <input type="button" class="addBtn" value="Submit" onclick="onClick()">
         </template>
     </html>
 </html>
