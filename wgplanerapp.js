@@ -3,9 +3,11 @@ class WGPlanerApp {
      * Konstruktor.
      * @param {Liste} pages Seiten, zwischen denen umgeschaltet werden kann
      */
-    constructor(pages) {
+
+    constructor(pages, router) {
         this._pages = pages;
         this._currentPageObject = null;
+        this.router = router;
 
         let browserCache = localStorage['wgplaner-daten'];
         if (browserCache) {
@@ -79,7 +81,21 @@ class WGPlanerApp {
         // Neue Seite anzeigen und merken
         this._currentPageObject = new newPage.klass(this, name, editIndex);
         this._currentPageObject.show();
-
+        if (name === "aufgaben-liste"){
+          this.router.navigate('/aufgaben');
+        } 
+        else if (name === "aufgabe-anlegen"){
+          this.router.navigate('/aufgabe/' + editIndex);
+        } 
+        else if (name === "aufgabe-bearbeiten"){
+          this.router.navigate('/aufgabe/' + editIndex);
+        }
+        else if (name === "einkaufsliste"){
+          this.router.navigate('/einkaufsliste');
+        } else{
+          alert("error");
+        }
+        
         // Aktuelle Seite im Kopfbereich hervorheben
         document.querySelectorAll("#wgplanerapp-header li").forEach(li => li.classList.remove("active"));
         document.querySelectorAll(`#wgplanerapp-header li[data-page-name="${name}"]`).forEach(li => li.classList.add("active"));

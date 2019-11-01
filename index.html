@@ -20,6 +20,8 @@
         <script src="aufgabe-anlegen.js"></script>
         <link rel="stylesheet" href="aufgabe-anlegen.css" />
 
+        <script src="node_modules/navigo/lib/navigo.js"></script>
+
         <script>
             window.addEventListener("load", () => {
                 let pages = [
@@ -48,9 +50,36 @@
                         hidden: false,
                     }
                 ];
+                // Navigo Router initialisieren
+                let router = new Navigo(null, true, '#!');
+                let app = new WGPlanerApp(pages, router);
 
-                let app = new WGPlanerApp(pages);
-                app.showPage("aufgaben-liste");
+                router.on(
+                {
+                    '/einkaufsliste': function () 
+                    {
+                        app.showPage("einkaufsliste", app._data.length);
+                    },
+                    '/aufgabe/:id': function ( parameter )
+                    {
+                        alert("aufgabebid");
+                        let id = parameter.id;
+                        app.showPage("aufgabe-bearbeiten", id);
+                    },
+                    '/aufgaben': function ()
+                    {
+                        app.showPage("aufgaben-liste", app._data.length);
+                    },
+                    '/': function ()
+                    {
+                        alert("none")
+                        app.showPage("aufgaben-liste", app._data.length);
+                    },
+                    '/*': function ()
+                    {
+                        alert("404")
+                    }
+                }).resolve();
             });
         </script>
     </head>
