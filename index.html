@@ -62,22 +62,15 @@
                     },
                     '/aufgabe/:id': function ( parameter )
                     {
-                        alert("aufgabebid");
-                        let id = parameter.id;
-                        app.showPage("aufgabe-bearbeiten", id);
+                        app.showPage("aufgabe-bearbeiten", app._data[parameter.id] ? parameter.id : undefined );
                     },
                     '/aufgaben': function ()
                     {
                         app.showPage("aufgaben-liste", app._data.length);
                     },
-                    '/': function ()
+                    '*': function ()
                     {
-                        alert("none")
                         app.showPage("aufgaben-liste", app._data.length);
-                    },
-                    '/*': function ()
-                    {
-                        alert("404")
                     }
                 }).resolve();
             });
@@ -98,7 +91,7 @@
         </template>
 
         <!-- Seite: AufgabenListe -->
-        <main id="vorlage-aufgaben-liste">
+        <main id="vorlage-aufgaben-liste" class="hidden">
           <p>Aufgabenverteilung:</p>
           <ul id="aufgabenliste">
           </ul>
