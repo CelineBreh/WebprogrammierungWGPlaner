@@ -8,10 +8,9 @@ class WGPlanerApp {
         this._currentPageObject = null;
 
         let browserCache = localStorage['wgplaner-daten'];
-        this._data = JSON.parse(browserCache);
-
-        if (this._data && this._data.length) {
+        if (browserCache) {
           // Erfolgreiches Laden der Daten des Browsers
+          this._data = JSON.parse(browserCache);
         }
         else {
           // Laden nicht erfolgreich, deshalb wird eine Beispielsaufgabe erstellt
