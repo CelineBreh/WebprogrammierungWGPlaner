@@ -4,11 +4,7 @@
  * Klasse AufgabenListe: Listet alle Aufgaben auf
  */
 class AufgabenListe {
-    /**
-     * Konstruktor.
-     *
-     * @param {App} app Instanz der App-Klasse
-     */
+
     constructor(app) {
         this._app = app;
         this._mainElement = document.getElementById("vorlage-aufgaben-liste");
@@ -28,9 +24,7 @@ class AufgabenListe {
         let liste = document.querySelector("#vorlage-aufgaben-liste > ul");
         liste.innerHTML = "";
 
-        // Meldung, wenn noch keine Daten vorhanden sind
         let data = this._app.getData();
-
         if (data.length < 1) {
             let template = document.getElementById("vorlage-aufgaben-liste-leer").innerHTML;
             liste.innerHTML = template;
@@ -77,25 +71,25 @@ class AufgabenListe {
         var headerElements = document.getElementsByClassName("todoheader");
         for (var i = 0; i < headerElements.length; i++) {
           let index = i;
-          //delete button
-          var span = document.createElement("SPAN");
-          var txt = document.createTextNode("\u00D7");
-          span.className = "close";
-          span.appendChild(txt);
-          span.addEventListener("click", () => this._askDelete(0 + index));
-          headerElements[i].appendChild(span);
-          //update button
-          var span2 = document.createElement("SPAN");
-          var txt2 = document.createTextNode("\u270E");
-          span2.className = "close";
-          span2.appendChild(txt2);
-          span2.addEventListener("click", () => this._askUpdate(0 + index));
-          headerElements[i].appendChild(span2);
+          // Lösch button
+          var löschButton = document.createElement("SPAN");
+          var löschText = document.createTextNode("\u00D7");
+          löschButton.className = "close";
+          löschButton.appendChild(löschText);
+          löschButton.addEventListener("click", () => this._askDelete(0 + index));
+          headerElements[i].appendChild(löschButton);
+          // Update button
+          var updateButton = document.createElement("SPAN");
+          var updateText = document.createTextNode("\u270E");
+          updateButton.className = "close";
+          updateButton.appendChild(updateText);
+          updateButton.addEventListener("click", () => this._askUpdate(0 + index));
+          headerElements[i].appendChild(updateButton);
         }
     }
 
     _askDelete(index) {
-        // Sicherheitsfrage zeigen
+        // Nochmals nachfragen
         let answer = confirm("Soll die ausgewählte Aufgabe wirklich gelöscht werden?");
         if (!answer) return;
 
@@ -107,7 +101,7 @@ class AufgabenListe {
     }
 
     _askUpdate(index) {
-      // Sicherheitsfrage zeigen
+      // Nochmals nachfragen
       let answer = confirm("Soll die ausgewählte Aufgabe wirklich bearbeitet werden?");
       if (!answer) return;
 
