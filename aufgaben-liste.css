@@ -3,6 +3,25 @@
    padding: 0;
  }
 
+ #aufgaben-liste-kopf{
+   border: 1px solid black;
+   border-radius: 5px;
+   margin: 10px;
+   overflow: hidden;
+   padding: 4px;
+ }
+
+ #aufgaben-liste-kopf p{
+   float: left;
+   margin: 0;
+ }
+
+ #aufgaben-liste-kopf input{
+   float: right;
+   margin: 0;
+ }
+
+
  .todobox {
    border: 1px solid black;
    border-radius: 5px;

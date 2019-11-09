@@ -78,12 +78,10 @@ class Einkaufsliste {
     var check = false;
     ch.addEventListener("click", function () {
       if (check == false) {
-        li.style.textDecoration = "line-through";
-        li.style.textDecorationColor = "black";
-        check = true;
+        li.display = "";
       }
       else {
-        li.style.textDecoration = "none";
+        li.display = "none";
         che = false;
       }
     }, false);

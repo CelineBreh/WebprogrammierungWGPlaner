@@ -84,16 +84,19 @@
       </header>
     </body>
     <html>
-        <!-- Elemente der Navigationsleiste -->
+        <!-- Navigationsleiste -->
         <template id="vorlage-wgplanerapp-menu-li">
             <li data-page-name="$NAME$">
                 <a>$LABEL$</a>
             </li>
         </template>
 
-        <!-- Seite: AufgabenListe -->
+        <!-- AufgabenListe -->
         <main id="vorlage-aufgaben-liste" class="hidden">
-          <p>Aufgabenverteilung:</p>
+          <div id="aufgaben-liste-kopf">
+            <p>Aufgabenverteilung:</p>
+            <input type="text" id="filterKriterium" placeholder="...">
+          </div>
           <ul id="aufgabenliste">
           </ul>
         </main>
