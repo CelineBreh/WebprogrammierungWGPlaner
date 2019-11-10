@@ -110,8 +110,6 @@ class AufgabeAnlegen {
         } else {
             this._app.appendData(this._dataset);
         }
-        alert("a");
-
         // Zurück zur Übersicht
         this._app.showPage("aufgaben-liste");
     }

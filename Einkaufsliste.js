@@ -86,6 +86,4 @@ class Einkaufsliste {
       }
     }, false);
   }
-
-  counter = 0;
 }

@@ -16,7 +16,7 @@
    margin: 0;
  }
 
- #aufgaben-liste-kopf input{
+ #aufgaben-liste-kopf input, #aufgaben-liste-kopf button{
    float: right;
    margin: 0;
  }

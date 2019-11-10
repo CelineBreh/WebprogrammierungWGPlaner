@@ -17,7 +17,7 @@ class WGPlanerApp {
                  beschreibung: "Bitte Geschirrspülmaschine einräumen und Kühlschrank ausräumen",
                  zustaendig: "Selina",
                  dringlichkeit: "1",
-                 datum: "24.12.2019"
+                 datum: new Date("1995-12-17T03:24:00")
              }
            ];
         }
@@ -152,4 +152,36 @@ class WGPlanerApp {
         localStorage['wgplaner-daten'] = JSON.stringify(this._data);
         return this._data.length - 1;
     }
+
+    _vergleichGröße(a, b) {
+      if(a > b) return -1;
+      if(a < b) return 1;
+      return 0;
+    }
+
+    /**
+     * Sortiert die Daten anhand des übergebenen Sortierkriteriums
+     *
+     * @param  {int} kriterium 0 -> dringlichkeit absteigend
+     *                         1 -> dringlichkeit aufsteigend
+     *                         2 -> datum absteigend
+     *                         3 -> datum aufsteigend
+     */
+     sortData(kriterium){
+       let this2 = this; // this ist nicht bekannt innerhalb von sort, darin muss aber auf this zugegriffen werden
+       this._data.sort( function(a, b) {
+        let vergleich;
+        if (kriterium == 0 || kriterium == 1) {
+          vergleich = this2._vergleichGröße(a.dringlichkeit, b.dringlichkeit);
+        }
+        else if(kriterium == 2 || kriterium == 3) {
+          vergleich = this2._vergleichGröße(a.datum, b.datum);
+        }
+        if (kriterium % 2 == 0){
+          return vergleich;
+        } else {
+          return -1 * vergleich;
+        }
+      });
+     }
 }

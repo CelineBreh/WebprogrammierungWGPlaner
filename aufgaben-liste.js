@@ -8,8 +8,13 @@ class AufgabenListe {
     constructor(app) {
         this._app = app;
         this._mainElement = document.getElementById("vorlage-aufgaben-liste");
+
         this._filterBar = document.getElementById("filterKriterium");
         this._filterBar.addEventListener('keyup', () => this._filtere());
+
+        this._sortierButton = document.getElementById("sortierButton");
+        this._sortierKriterium = 0; // 0 -> dringlichkeit absteigend
+        this._sortierButton.addEventListener('click', () => this._sortiere());
     }
 
     show() {
@@ -32,6 +37,7 @@ class AufgabenListe {
             liste.innerHTML = template;
             return;
         }
+        this._app.sortData(this._sortierKriterium);
 
         data.forEach(dataset => {
             var divTodoBox = document.createElement("LI");
@@ -132,5 +138,20 @@ class AufgabenListe {
           }
         }
       }
+    }
+
+    _sortiere(){
+      this._sortierKriterium = (this._sortierKriterium + 1) % 4;
+      if (this._sortierKriterium == 0) {
+        this._sortierButton.innerHTML = "Dringlichkeit absteigend";
+      } else if (this._sortierKriterium == 1) {
+        this._sortierButton.innerHTML = "Dringlichkeit aufsteigend";
+      } else if (this._sortierKriterium == 2) {
+        this._sortierButton.innerHTML = "Datum absteigend";
+      } else if (this._sortierKriterium == 3) {
+        this._sortierButton.innerHTML = "Datum aufsteigend";
+      }
+      this._renderList();
+      this._filtere();
     }
 }
