@@ -1,62 +1,80 @@
- #aufgabenliste{
-   list-style-type: none;
-   padding: 0;
- }
+#vorlage-aufgaben-liste{
+  background: white;
+  font-family: 'Handlee', cursive;
+}
 
- #aufgaben-liste-kopf{
-   border: 1px solid black;
-   border-radius: 5px;
-   margin: 10px;
-   overflow: hidden;
-   padding: 4px;
- }
+#aufgabenliste{
+  list-style-type: none;
+  padding: 0;
+}
 
- #aufgaben-liste-kopf p{
-   float: left;
-   margin: 0;
- }
+#aufgaben-liste-kopf{
+  margin: 10px;
+  overflow: hidden;
+  padding: 4px;
+}
 
- #aufgaben-liste-kopf input, #aufgaben-liste-kopf button{
-   float: right;
-   margin: 0;
- }
+#aufgaben-liste-kopf p{
+  float: left;
+  margin: 0;
+  font-family: 'Handlee', cursive;
+  font-size: 15pt;
+}
 
+#aufgaben-liste-kopf input, #aufgaben-liste-kopf button{
+  float: right;
+  margin: 0;
+}
 
- .todobox {
-   border: 1px solid black;
-   border-radius: 5px;
-   margin: 10px;
- }
+#filterKriterium{
+padding-top: 10px;
+  margin-top: 10px;
+  font-family: 'Handlee', cursive;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
 
- .todoheader {
-   border-bottom: 1px solid black;
-   list-style-type: none;
-   overflow: hidden;
-   padding: 4px;
-   margin: 0;
- }
+#sortierButton{
+  padding: 7px;
+  margin-left: 4em;
+  font-family: 'Handlee', cursive;
+}
 
- .todoheader li {
-   float: left;
-   margin-left: 0px;
-   margin-right: 4px;
- }
+.todobox {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px;
+}
 
- .todofooter {
-   border: none;
-   list-style-type: none;
-   overflow: hidden;
-   padding: 4px;
-   margin: 0;
- }
+.todoheader {
+  list-style-type: none;
+  overflow: hidden;
+  padding: 4px;
+  margin: 0;
+}
 
- .close {
-   float: right;
-   padding-left: 4px;
-   padding-right: 4px;
- }
+.todoheader li {
+  float: left;
+  margin-left: 0px;
+  margin-right: 4px;
+}
 
- .close:hover {
-   background-color: #f34435;
-   color: white;
- }
+.todofooter {
+  border: none;
+  list-style-type: none;
+  overflow: hidden;
+  padding: 4px;
+  margin: 0;
+}
+
+.close {
+  float: right;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.close:hover {
+  background-color: #f34435;
+  color: white;
+}

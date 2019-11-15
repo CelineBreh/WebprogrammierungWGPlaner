@@ -129,11 +129,24 @@
         <template id="vorlage-aufgabe-bearbeiten">
             <div>
                 <div class="form">
-                    <input class="aufgabe" placeholder="Aufgabe" value="$AUFGABE$" />
+                  <input  type="text" class="aufgabe" placeholder="Aufgabe" value="$AUFGABE$" list="auftrag">
+                    <datalist id= "auftrag">
+                       <option value="Bad putzen"/>
+                       <option value="Geschirrspülmaschine ausräumen"/>
+                       <option value="Kochen"/>
+                       <option value="Küche putzen"/>
+                       <option value="Kühlschrank aussortieren"/>
+                       <option value="Rasenmähen"/>
+                       <option value="Staubsaugen"/>
+                       <option value="Wäsche aufhängen"/>
+                       <option value="Wohnzimmer aufräumen"/>
+                       <option value="Wohnzimmer putzen"/>
+                     </datalist>
+                   </input>
                     <input class="beschreibung" placeholder="Beschreibung" value="$BESCHREIBUNG$" />
                     <input class="zustaendig" placeholder="Zuständig" value="$ZUSTAENDIG$" />
-                    <input class="dringlichkeit" placeholder="Dringlichkeit" value="$DRINGLICHKEIT$" />
-                    <input class="datum" placeholder="Erledigen bis" value="$DATUM$" />
+                    <input class="dringlichkeit" placeholder="Dringlichkeit von 1 bis 3" value="$DRINGLICHKEIT$" />
+                    <input class="datum" type="date"  min="2019-11-18" max="2060-12-31"value="$DATUM$" />
                 </div>
                 <div class="actions">
                     <div class="action save">

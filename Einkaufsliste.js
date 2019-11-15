@@ -1,7 +1,7 @@
 "use strict";
 /**
- * Klasse Einkaufsliste: Stellt eine bearbeitbare Einkaufsliste dar
- */
+* Klasse Einkaufsliste: Stellt eine bearbeitbare Einkaufsliste dar
+*/
 
 let counter = 0;
 
@@ -55,20 +55,19 @@ let add = () => {
 
   if (inputValue === '') {
    alert("Du musst ein Lebensmitel hinzufügen!");
- } else {
+} else {
    label.appendChild(checkbox);
    document.getElementById("list").appendChild(label);
 
-     var br= document.createElement("br");
-     document.getElementById("list").appendChild(br);
-     addRemoveBtn(label, checkbox,br);
+
+     addRemoveBtn(label, checkbox);
        addCrossStyle(label, checkbox);
      myInput.value="";
- }
+}
 
 }
 
-let addRemoveBtn=(li, ch, br)=>  {
+let addRemoveBtn=(li, ch)=>  {
 
   var removeTask = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
@@ -79,7 +78,7 @@ let addRemoveBtn=(li, ch, br)=>  {
   removeTask.addEventListener("click", function () {
     li.parentNode.removeChild(li);
     ch.parentNode.removeChild(ch);
-    br.parentNode.removeChild(br);
+
 
   }, false);
   li.appendChild(removeTask);

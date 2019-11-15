@@ -12,49 +12,88 @@
  * Möglichkeiten geben.
  */
 
-/* FORMULARFELDER */
-#main-aufgabe-bearbeiten{
-    background-color: white;
-    padding: 1em;
+ /* FORMULARFELDER */
+ #main-aufgabe-bearbeiten{
+   background-color: white;
+   padding: 1em;
+   font-family: 'Handlee', cursive;
+ }
+
+ #main-aufgabe-bearbeiten .aufgabe  {
+   display: block;
+   width: 100%;
+   font-family: 'Handlee', cursive;
+   border: 0px solid lightgrey;
+   border-bottom-width: 1px;
+   padding: 0.5em 0 0.5em 0;
+   margin-bottom: 1em;
+ }
+
+ #main-aufgabe-bearbeiten .beschreibung {
+   display: block;
+   width: 100%;
+   border: 0px solid lightgrey;
+   border-bottom-width: 1px;
+   font-family: 'Handlee', cursive;
+   padding: 0.5em 0 0.5em 0;
+   margin-bottom: 1em;
 }
 
-#main-aufgabe-bearbeiten .form > * {
-    display: block;
-    width: 100%;
+ #main-aufgabe-bearbeiten .zustaendig  {
+   display: block;
+   width: 100%;
+   font-family: 'Handlee', cursive;
+   border: 0px solid lightgrey;
+   border-bottom-width: 1px;
+   padding: 0.5em 0 0.5em 0;
+   margin-bottom: 1em;
+ }
 
-    border: 0px solid lightgrey;
-    border-bottom-width: 1px;
+ #main-aufgabe-bearbeiten .dringlichkeit  {
+   display: block;
+   width: 100%;
+   border: 0px solid lightgrey;
+   border-bottom-width: 1px;
+   font-family: 'Handlee', cursive;
+   padding: 0.5em 0 0.5em 0;
+   margin-bottom: 1em;
+  }
 
-    padding: 0.5em 0 0.5em 0;
-    margin-bottom: 1em;
-}
+ #main-aufgabe-bearbeiten .datum  {
+   display: block;
+   width: 100%;
+   color: gray;
+   border: 0px solid lightgrey;
+   border-bottom-width: 1px;
+   font-family: 'Handlee', cursive;
+   padding: 0.5em 0 0.5em 0;
+   margin-bottom: 1em;
+  }
 
-/* AKTIONSBUTTONS */
-#main-aufgabe-bearbeiten .actions {
-    display: flex;
-    justify-content: space-between;
-}
+ /* AKTIONSBUTTONS */
+ #main-aufgabe-bearbeiten .actions {
+   display: flex;
+   justify-content: space-between;
+ }
 
-#main-aufgabe-bearbeiten .actions > div {
-    padding: 0.5em;
-    margin: 0.5em;
+ #main-aufgabe-bearbeiten .actions > div {
+   padding: 0.5em;
+   margin: 0.5em;
+   background-color: #e0e0e0;
+   transition: background-color 0.5s;
+   flex: 1;
+   text-align: center;
+ }
 
-    background-color: #e0e0e0;
-    transition: background-color 0.5s;
+ #main-aufgabe-bearbeiten .actions > div:first-child {
+   margin-left: 0;
+ }
 
-    flex: 1;
-    text-align: center;
-}
+ #main-aufgabe-bearbeiten .actions > div:last-child {
+   margin-right: 0;
+ }
 
-#main-aufgabe-bearbeiten .actions > div:first-child {
-    margin-left: 0;
-}
-
-#main-aufgabe-bearbeiten .actions > div:last-child {
-    margin-right: 0;
-}
-
-#main-aufgabe-bearbeiten .actions > div:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-}
+ #main-aufgabe-bearbeiten .actions > div:hover {
+   background-color: #f0f0f0;
+   cursor: pointer;
+ }

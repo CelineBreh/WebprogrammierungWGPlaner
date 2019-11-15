@@ -1,40 +1,37 @@
 html, body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 html {
-    font-family: "Rubik", sans-serif;
-    font-size: 10pt;
-    line-height: 1.6;
+  font-family: "Rubik", sans-serif;
+  font-size: 10pt;
+  line-height: 1.6;
+  background-image: url(tafel10.jpg);
 }
-
-.hidden {
-    display: none;
-}
-
 
 html {
-    font-size: 11pt;
+  font-size: 11pt;
 }
 
 main {
-    max-width: 40em;
-    margin: 0 auto;
-    margin-top: 2em;
-    margin-bottom: 2em;
-
-    border: 1px solid black;
-    border-radius: 5px;
+  max-width: 40em;
+  margin: 0 auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 /** Navigationsleiste **/
 header ul {
-  background-color: #394433;
+  background-color: #0B0B3B;
   list-style-type: none;
   margin: 0;
   overflow: hidden;
   padding: 0;
+  font-family: 'Handlee', cursive;
+  font-size: 18px;
 }
 
 header ul li {
@@ -55,4 +52,8 @@ header ul li a:hover {
 
 .active {
   background-color: green;
+}
+
+.hidden {
+  display: none;
 }
