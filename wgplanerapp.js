@@ -1,8 +1,15 @@
+"use strict"
+
+import DB from "./database.js";
+
+
+
 class WGPlanerApp {
     constructor(pages, router) {
         this._pages = pages;
         this._currentPageObject = null;
         this.router = router;
+        this._db = new DB();
 
         let browserCache = localStorage['wgplaner-daten'];
         if (browserCache) {
@@ -139,6 +146,12 @@ class WGPlanerApp {
     deleteDataByIndex(index) {
         this._data.splice(index, 1);
         localStorage['wgplaner-daten'] = JSON.stringify(this._data);
+        this._db.deleteAufgabe(index).then(function() {
+          console.log("Rezept " + index + "gelöscht");
+          location.reload();
+        }).catch(function(error) {
+          console.error("Error beim löschen von: ", error);
+        });
     }
 
     /**

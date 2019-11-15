@@ -3,10 +3,15 @@
 /**
  * Klasse AufgabenListe: Listet alle Aufgaben auf
  */
+import DB from "../database.js";
+
 class AufgabenListe {
+
+  let _db = "";
 
     constructor(app) {
         this._app = app;
+        _db = app._db;
         this._mainElement = document.getElementById("vorlage-aufgaben-liste");
 
         this._filterBar = document.getElementById("filterKriterium");
@@ -18,6 +23,7 @@ class AufgabenListe {
     }
 
     show() {
+        _db.getAllAufgaben().then(function(querySnapshot)
         this._renderList();
         this._mainElement.classList.remove("hidden");
     }

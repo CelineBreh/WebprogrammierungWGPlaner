@@ -82,6 +82,18 @@
         <ul>
         </ul>
       </header>
+
+      <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+      <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+      <script src="/__/firebase/7.3.0/firebase-app.js"></script>
+
+      <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+      <script src="/__/firebase/7.3.0/firebase-analytics.js"></script>
+
+      <!-- Add Firebase products that you want to use -->
+      <script src="/__/firebase/7.3.0/firebase-auth.js"></script>
+      <script src="/__/firebase/7.3.0/firebase-firestore.js"></script>
     </body>
     <html>
         <!-- Navigationsleiste -->
@@ -132,13 +144,29 @@
         </template>
 
         <main id="vorlage-einkaufsliste" class="hidden">
-          <p>Einkaufsliste</p>
-          <div id="list">
-          </div>
-          <label>
-            <input type="text" id="nameL" >
-          </label>
-          <input type="button" class="addBtn" value="Submit" onclick="onClick"><!-- todo in js eventlistener hinzufügen, nicht hier -->
-        </main>
+
+         <p id="titel">Einkaufsliste</p>
+         <ul id="list">
+         </ul>
+         <label>
+           <input type="button" class="addBtn" id="addBtn" value="+">
+
+           <input type="text" id="myInput" placeholder="Lebensmittel..." list="lebensmittel" >
+            <datalist id="lebensmittel">
+               <option value="Milch"/>
+               <option value="Zucker"/>
+               <option value="Butter"/>
+               <option value="Toilettenpapier"/>
+               <option value="Handtücher"/>
+               <option value="Spülmittel"/>
+               <option value="Öl"/>
+               <option value="Mehl"/>
+               <option value="Salz"/>
+               <option value="Brot"/>
+            </datalist>
+          </input>
+        </label>
+
+       </main>
     </html>
 </html>

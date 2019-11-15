@@ -14,9 +14,11 @@ class AufgabeAnlegen {
      * @param {String} pageName Name der aufgerufenen Seite
      * @param  {Integer} editIndex Nummer des bearbeiteten Datensatzes
      */
+     let _db = "";
     constructor(app, pageName, editIndex) {
         // Parameter merken
         this._app = app;
+        _db = this._app._db;
         this._editIndex = editIndex;
 
         // Hauptelement mit dem Inhalt der Seite ermitteln
@@ -110,6 +112,9 @@ class AufgabeAnlegen {
         } else {
             this._app.appendData(this._dataset);
         }
+        
+        console.log(dataset);
+        _db.addAufgabe(dataset).then(() => window.location.href = '/aufgaben-liste');
         // Zurück zur Übersicht
         this._app.showPage("aufgaben-liste");
     }
