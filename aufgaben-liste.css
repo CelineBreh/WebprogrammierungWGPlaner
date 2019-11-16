@@ -1,6 +1,7 @@
 #vorlage-aufgaben-liste{
   background: white;
   font-family: 'Handlee', cursive;
+  padding: 5px;
 }
 
 #aufgabenliste{
@@ -19,15 +20,23 @@
   margin: 0;
   font-family: 'Handlee', cursive;
   font-size: 15pt;
+  padding-right: 8em;
 }
 
 #aufgaben-liste-kopf input, #aufgaben-liste-kopf button{
-  float: right;
   margin: 0;
+  border-width:2px;
+  border-color: #0B0B3B;
+}
+
+#aufgaben-liste-kopf button{
+  border-radius: 5px;
+  padding-left: 5px;
+  float: right;
 }
 
 #filterKriterium{
-padding-top: 10px;
+  padding-top: 10px;
   margin-top: 10px;
   font-family: 'Handlee', cursive;
   border-top: 0px;
@@ -77,4 +86,33 @@ padding-top: 10px;
 .close:hover {
   background-color: #f34435;
   color: white;
+}
+
+@media screen and (max-width: 800px){
+  .thumbnail{
+    width: 47.5%;
+  }
+  html {
+    background-image: url(tafelHandy.jpg);
+  }
+  #aufgaben-liste-kopf p{
+    padding-right: 1.7em;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .thumbnail{
+    width: 31%;
+  }
+  #aufgaben-liste-kopf input{
+    float: left;
+    width: 40%;
+  }
+  #aufgaben-liste-kopf button{
+    float: right;
+  }
+  #aufgaben-liste-kopf p{
+    padding-bottom: 10px;
+    padding-left: 2.8em;
+  }
 }

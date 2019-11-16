@@ -5,17 +5,13 @@ html, body {
 
 html {
   font-family: "Rubik", sans-serif;
-  font-size: 10pt;
+  font-size: 11pt;
   line-height: 1.6;
   background-image: url(tafel10.jpg);
 }
 
-html {
-  font-size: 11pt;
-}
-
 main {
-  max-width: 40em;
+  max-width: 50em;
   margin: 0 auto;
   margin-top: 2em;
   margin-bottom: 2em;
@@ -56,4 +52,28 @@ header ul li a:hover {
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 800px){
+  .thumbnail{
+    width: 47.5%;
+  }
+  main {
+    max-width: 40em;
+  }
+  html {
+    background-image: url(tafelHandy.jpg);
+  }
+}
+
+@media screen and (max-width: 600px){
+  .thumbnail{
+    width: 31%;
+  }
+  header ul{
+    font-size: 14px;
+  }
+  main {
+      max-width: 23em;
+  }
 }
