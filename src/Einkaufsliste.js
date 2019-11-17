@@ -1,9 +1,8 @@
 "use strict";
 /**
-* class Einkaufsliste: is an edited grocery list
+* Klasse Einkaufsliste: is an edited grocery list
 */
 
-let counter = 0;
 
 class Einkaufsliste {
   constructor(app, pageName, editIndex) {
@@ -22,10 +21,7 @@ class Einkaufsliste {
   }
 
   _renderList() {
-    // todo similar to the other js files
-    document.getElementById("addBtn").addEventListener('click', () => {
-      add();
-    });
+    document.getElementById("addBtn").addEventListener('click', add);
     window.addEventListener("keypress", (event) => {
       console.log(event.key + " pressed");
       if(event.key == 'Enter')
@@ -38,31 +34,34 @@ class Einkaufsliste {
 }
 
 let add = () => {
-  counter++;
-  var list = document.getElementById("list");
-  var checkbox = document.createElement("input");
-  checkbox.setAttribute("type", "checkbox");
-  checkbox.setAttribute("class", "checkbox");
-  checkbox.setAttribute("id", "cb" + counter);
+  let lebensmittellist =[lebensmittel];
+  lebensmittellist.forEach(lebensmittel => {
 
+    var list = document.getElementById("list");
 
-  var label = document.createElement("li");
+    var checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("class", "checkbox");
+
+  var label = document.createElement("LI");
   var inputValue = document.getElementById("myInput").value;
   var t = document.createTextNode(inputValue);
   label.appendChild(t);
   label.setAttribute("class", "label");
-  label.setAttribute("for", "cb" + counter);
 
   if (inputValue === '') {
    alert("Du musst ein Lebensmitel hinzufügen!");
    return;
-} else {
+}
+
    label.appendChild(checkbox);
-   document.getElementById("list").appendChild(label);
-     addRemoveBtn(label, checkbox);
-     addCrossStyle(label, checkbox);
-     myInput.value="";
-   }
+   list.appendChild(label);
+
+   addRemoveBtn(label, checkbox);
+   addCrossStyle(label, checkbox);
+   myInput.value="";
+  });
+
 }
 
 let addRemoveBtn=(li, ch)=>  {
@@ -74,15 +73,14 @@ let addRemoveBtn=(li, ch)=>  {
 
   //remove task function
   removeTask.addEventListener("click", function () {
-  li.parentNode.removeChild(li);
-  ch.parentNode.removeChild(ch);
-
+    li.parentNode.removeChild(li);
+    ch.parentNode.removeChild(ch);
 
   }, false);
-  li.appendChild(removeTask);
 
+  li.appendChild(removeTask);
 }
-let addCrossStyle =(li, ch)=>  {
+  let addCrossStyle =(li, ch)=>  {
   var check = false;
 
   ch.addEventListener("click", function () {
@@ -92,12 +90,7 @@ let addCrossStyle =(li, ch)=>  {
       li.style.background=" #888";
       check = true;
     }
-    else {
-      li.style.textDecoration = "none";
-      li.style.color="none";
-      li.style.background="none";
-      ch = false;
-    }
+
   },
   false);
 }
