@@ -18,15 +18,24 @@ class TodoList {
         this._sortButton.addEventListener('click', () => this._sort());
     }
 
+    /*
+    * Shows the page by removing hidden
+    */
     show() {
         this._renderList();
         this._mainElement.classList.remove("hidden");
     }
 
+    /*
+    * Hides the page
+    */
     hide() {
         this._mainElement.classList.add("hidden");
     }
 
+    /*
+    * Add the todos as html into the page
+    */
     _renderList() {
         let list = document.querySelector("#vorlage-aufgaben-liste > ul");
         list.innerHTML = "";
@@ -50,7 +59,7 @@ class TodoList {
               } else if (todo.dringlichkeit == "3"){
                 ulTodoHeader.style="background-color: #3BBF4C"
               } else{
-                // not highlight
+                // not highlighted
               }
               ulTodoHeader.className = "todoheader";
                 var liPerson = document.createElement("LI");
@@ -94,6 +103,7 @@ class TodoList {
           updateButton.addEventListener("click", () => this._askUpdate(0 + index));
           headerElements[i].appendChild(updateButton);
         }
+        this._filter();
     }
 
     _askDelete(index) {
@@ -120,6 +130,11 @@ class TodoList {
       this._renderList();
     }
 
+    /*
+    * Filteres out all not matching TodoList
+    * If for instance "blub test" is searched this is divided into "blub" and "test"
+    * Now all todos are hidden if their values (e.g. descriptiom) do not contain either "blub" or "test"
+    */
     _filter(){
       let input = this._filterBar.value.toUpperCase();
       let filterValues = input.split(/[ ,]+/);
@@ -140,6 +155,9 @@ class TodoList {
       }
     }
 
+    /*
+    * Increments the sort criteria and rerenders the list which triggers sorting the todos
+    */
     _sort(){
       this._sortCriteria = (this._sortCriteria + 1) % 4;
       if (this._sortCriteria == 0) {
@@ -152,6 +170,5 @@ class TodoList {
         this._sortButton.innerHTML = "Datum aufsteigend";
       }
       this._renderList();
-      this._filter();
     }
 }

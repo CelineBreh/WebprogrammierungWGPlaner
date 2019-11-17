@@ -127,7 +127,7 @@ class WGPlanerApp {
      */
     updateTodoByIndex(index, todo) {
         this.todos[index] = todo;
-        this.persistData();
+        this.persistTodos();
     }
 
     /**
@@ -137,7 +137,7 @@ class WGPlanerApp {
      */
     deleteTodoByIndex(index) {
         this.todos.splice(index, 1);
-        this.persistData();
+        this.persistTodos();
     }
 
     /**
@@ -148,7 +148,7 @@ class WGPlanerApp {
      */
     appendTodo(todo) {
         this.todos.push(todo);
-        this.persistData();
+        this.persistTodos();
         return this.todos.length - 1;
     }
 
@@ -177,13 +177,19 @@ class WGPlanerApp {
       });
      }
 
+     /*
+     * Comparison of two numbers is needed for sorting the todos
+     */
      compareNumbers(a, b) {
        if(a > b) return -1;
        if(a < b) return 1;
        return 0;
      }
 
-     persistData(){
+     /*
+     * Persist the todos using firebase
+     */
+     persistTodos(){
        this.database.ref('todos').set(this.todos);
      }
 }
