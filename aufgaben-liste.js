@@ -50,7 +50,7 @@ class TodoList {
               } else if (todo.dringlichkeit == "3"){
                 ulTodoHeader.style="background-color: #3BBF4C"
               } else{
-                // nicht einfärben
+                // not
               }
               ulTodoHeader.className = "todoheader";
                 var liPerson = document.createElement("LI");
@@ -75,18 +75,18 @@ class TodoList {
             divTodoBox.appendChild(ulTodoFooter);
             liste.appendChild(divTodoBox);
         });
-        // Buttons hinzufügen
+        // add buttons
         var headerElements = document.getElementsByClassName("todoheader");
         for (var i = 0; i < headerElements.length; i++) {
           let index = i;
-          // Lösch button
+          // delete button
           var löschButton = document.createElement("SPAN");
           var löschText = document.createTextNode("\u00D7");
           löschButton.className = "close";
           löschButton.appendChild(löschText);
           löschButton.addEventListener("click", () => this._askDelete(0 + index));
           headerElements[i].appendChild(löschButton);
-          // Update button
+          // update button
           var updateButton = document.createElement("SPAN");
           var updateText = document.createTextNode("\u270E");
           updateButton.className = "close";
@@ -97,26 +97,26 @@ class TodoList {
     }
 
     _askDelete(index) {
-        // Nochmals nachfragen
+        //ask again
         let answer = confirm("Soll die ausgewählte Aufgabe wirklich gelöscht werden?");
         if (!answer) return;
 
-        // Datensatz löschen
+        //delete dataset
         this._app.deleteTodoByIndex(index);
 
-        // Liste neu ausgeben
+        //output list again
         this._renderList();
     }
 
     _askUpdate(index) {
-      // Nochmals nachfragen
+      //ask again
       let answer = confirm("Soll die ausgewählte Aufgabe wirklich bearbeitet werden?");
       if (!answer) return;
 
-      // Datensatz bearbeiten
+      //edit dataset
       this._app.showPage("aufgabe-bearbeiten", index)
 
-      // Liste neu ausgeben
+      //output list again
       this._renderList();
     }
 
