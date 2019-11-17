@@ -10,10 +10,8 @@ um eine so genannte Single Page App, da die App nur einmal durch
 Aufrufen der HTML-Datei gestartet werden kann und dann bis zum Verlassen der
 App nicht wieder neugeladen wird. //Definition von spa hinzufügen
 
-Die Anwendung kann an folgender Stelle online betrachtet werden:
-file:///C:/Users/BREHCE/Desktop/WGPlaner/WebprogrammierungWGPlaner/index.html
-// falsch, das ist verweis auf eine lokale datei, auf die nur du zugreifen kannst
-// eher sowas wie clone das projekt und öffne die index.html im browser bzw node start
+Um die Anwendung zu starten muss das ganze Projekt heruntergeladen oder geclont werden. Anschließend muss lediglich die index.html in einem Browser geöffent werden.
+
 Verwendete Technologien
 -----------------------
 
