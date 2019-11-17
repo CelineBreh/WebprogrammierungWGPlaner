@@ -12,7 +12,7 @@ App nicht wieder neugeladen wird. Das bedeutet eine Single Page App besteht nur 
 wobei deren Inhalte dynamisch nachgeladen werden.
 
 
-=======
+
 Um die Anwendung zu starten muss das ganze Projekt heruntergeladen oder geclont werden. Anschließend muss lediglich die index.html in einem Browser geöffent werden.
 
 
@@ -45,19 +45,19 @@ UI-Skizzen und Screenshots
 <table style="max-width: 100%;">
     <tr>
         <td>
-            <img src="mockup1.png" style="display: block; width: 100%;" />
+            <img src="mockup1.PNG" style="display: block; width: 100%;" />
         </td>
 		<td>
-            <img src="mockup2.png" style="display: block; width: 100%;" />
+            <img src="mockup2.PNG" style="display: block; width: 100%;" />
         </td>
         <td>
-            <img src="mockup3.png" style="display: block; width: 100%;" />
+            <img src="mockup3.PNG" style="display: block; width: 100%;" />
         </td>
         <td>
-            <img src="mockup4.png" style="display: block; width: 100%;" />
+            <img src="mockup4.PNG" style="display: block; width: 100%;" />
         </td>
 		<td>
-            <img src="mockup5.png" style="display: block; width: 100%;" />
+            <img src="mockup5.PNG" style="display: block; width: 100%;" />
         </td>
     </tr>
     <tr>
