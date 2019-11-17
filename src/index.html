@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>WG-Planer</title>
+
+        <!-- class wgplanerapp: operates the entire application -->
+        <script src="wgplanerapp.js"></script>
+        <link rel="stylesheet" href="wgplanerapp.css" />
+
+        <!-- class AufgabenListe: shows entire task list -->
+        <script src="aufgaben-liste.js"></script>
+        <link rel="stylesheet" href="aufgaben-liste.css" />
+
+        <!-- class Einkaufsliste: shows grocery list and there are different opportunities to edit the list -->
+        <script src="Einkaufsliste.js"></script>
+        <link rel="stylesheet" href="Einkaufsliste.css" />
+
+        <!-- class AufgabeAnlegen: is necessary to create new tasks and edit old ones-->
+        <script src="aufgabe-anlegen.js"></script>
+        <link rel="stylesheet" href="aufgabe-anlegen.css" />
+
+        <!-- is essential for the routing operation -->
+        <script src="../node_modules/navigo/lib/navigo.js"></script>
+
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-database.js"></script>
+
+        <script>
+            window.addEventListener("load", () => {
+                let pages = [
+                    {
+                        name: "aufgaben-liste",
+                        klass: TodoList,
+                        label: "To do",
+                        hidden: false,
+                    },
+                    {
+                        name: "aufgabe-anlegen",
+                        klass: AufgabeAnlegen,
+                        label: "Aufgabe hinzufügen",
+                        hidden: false,
+                    },
+                    {
+                        name: "aufgabe-bearbeiten",
+                        klass: AufgabeAnlegen,
+                        label: "Aufgabe bearbeiten",
+                        hidden: true,
+                    },
+                    {
+                        name: "einkaufsliste",
+                        klass: Einkaufsliste,
+                        label: "Einkaufsliste",
+                        hidden: false,
+                    }
+                ];
+
+                // initialize Navigo Router
+                let router = new Navigo(null, true, '#!');
+                let app = new WGPlanerApp(pages, router);
+
+                router.on(
+                {
+                    '/einkaufsliste': function ()
+                    {
+                        app.showPage("einkaufsliste", app.todos.length);
+                    },
+                    '/aufgabe/:id': function ( parameter )
+                    {
+                        app.showPage("aufgabe-bearbeiten", app.todos[parameter.id] ? parameter.id : undefined );
+                    },
+                    '/aufgaben': function ()
+                    {
+                        app.showPage("aufgaben-liste", 0);
+                    },
+                    '*': function ()
+                    {
+                        app.showPage("aufgaben-liste", 0);
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+      <header id = "wgplanerapp-header">
+        <ul>
+        </ul>
+      </header>
+
+    </body>
+    <html>
+        <!-- Navigation bar -->
+        <template id="vorlage-wgplanerapp-menu-li">
+            <li data-page-name="$NAME$">
+                <a>$LABEL$</a>
+            </li>
+        </template>
+
+        <!-- task list -->
+        <main id="vorlage-aufgaben-liste" class="hidden">
+          <div id="aufgaben-liste-kopf">
+            <p>Aufgabenverteilung:</p>
+            <button type="button" id="sortButton">Dringlichkeit absteigend</button>
+            <input type="text" id="filterbar" placeholder="Suche ...">
+          </div>
+          <ul id="aufgabenliste">
+          </ul>
+        </main>
+
+        <template id="vorlage-aufgaben-liste-leer">
+            <li>
+                <div class="name">
+                    Keine Aufgaben zu tun, habe einen schönen Tag:)
+                </div>
+            </li>
+        </template>
+
+        <!-- site: create/edit task -->
+        <main id="main-aufgabe-bearbeiten" class="hidden"> </main>
+        <template id="vorlage-aufgabe-bearbeiten">
+            <div>
+                <div class="form">
+                    <input  type="text" class="aufgabe" placeholder="Aufgabe" value="$AUFGABE$" list="auftrag">
+                    <datalist id= "auftrag">
+                       <option value="Bad putzen"/>
+                       <option value="Geschirrspülmaschine ausräumen"/>
+                       <option value="Kochen"/>
+                       <option value="Küche putzen"/>
+                       <option value="Kühlschrank aussortieren"/>
+                       <option value="Rasenmähen"/>
+                       <option value="Staubsaugen"/>
+                       <option value="Wäsche aufhängen"/>
+                       <option value="Wohnzimmer aufräumen"/>
+                       <option value="Wohnzimmer putzen"/>   </datalist> </input>
+
+                    <input class="beschreibung" placeholder="Beschreibung" value="$BESCHREIBUNG$" />
+                    <input class="zustaendig" placeholder="Zuständig" value="$ZUSTAENDIG$" />
+                    <input class="dringlichkeit" placeholder="Dringlichkeit von 1 bis 3" value="$DRINGLICHKEIT$" />
+                    <input class="datum" type="date"  min="2019-11-18" max="2060-12-31"value="$DATUM$" />
+                  </div>
+                <div class="actions">
+                    <div class="action save">
+                        <a>Aufgabe speichern</a>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+          <!-- site: grocery list -->
+
+        <main id="vorlage-einkaufsliste" class="hidden">
+
+         <p id="titel">Einkaufsliste</p>
+         <ul id="list">
+         </ul>
+         <label>
+           <input type="button" class="addBtn" id="addBtn" value="+">
+
+           <input type="text" id="myInput" placeholder="Lebensmittel..." list="lebensmittel" >
+            <datalist id="lebensmittel">
+               <option value="Milch"/>
+               <option value="Zucker"/>
+               <option value="Butter"/>
+               <option value="Toilettenpapier"/>
+               <option value="Handtücher"/>
+               <option value="Spülmittel"/>
+               <option value="Öl"/>
+               <option value="Mehl"/>
+               <option value="Salz"/>
+               <option value="Brot"/>
+            </datalist>
+          </input>
+        </label>
+
+       </main>
+    </html>
+</html>
