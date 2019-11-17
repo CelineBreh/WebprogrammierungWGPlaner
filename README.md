@@ -79,5 +79,5 @@ Dieses Projekt ist lizenziert unter
 
 © 2019 Sazin Ali, Selina Pfeifer, Celine Breh <br/>
 
-E-Mail: [sazeenali85@gmail.com][selina1.pfeifer@web.de] [celine.breh@web.de](mailto:selina1.pfeifer@web.de) <br/>
+E-Mail: [sazeenali85@gmail.com][selina1.pfeifer@web.de] [celine.breh@web.de] <br/>
 Webseite: file:///C:/Users/BREHCE/Desktop/WGPlaner/WebprogrammierungWGPlaner/index.html
