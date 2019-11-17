@@ -11,11 +11,11 @@ class TodoList {
         this._mainElement = document.getElementById("vorlage-aufgaben-liste");
 
         this._filterBar = document.getElementById("filterbar");
-        this._filterBar.addEventListener('keyup', () => this._filtere());
+        this._filterBar.addEventListener('keyup', () => this._filter());
 
         this._sortButton = document.getElementById("sortButton");
         this._sortCriteria = 0; // 0 -> dringlichkeit absteigend
-        this._sortButton.addEventListener('click', () => this._sortiere());
+        this._sortButton.addEventListener('click', () => this._sort());
     }
 
     show() {
@@ -28,13 +28,13 @@ class TodoList {
     }
 
     _renderList() {
-        let liste = document.querySelector("#vorlage-aufgaben-liste > ul");
-        liste.innerHTML = "";
+        let list = document.querySelector("#vorlage-aufgaben-liste > ul");
+        list.innerHTML = "";
 
         let todos = this._app.getTodos();
         if (todos.length < 1) {
             let template = document.getElementById("vorlage-aufgaben-liste-leer").innerHTML;
-            liste.innerHTML = template;
+            list.innerHTML = template;
             return;
         }
         this._app.sortTodos(this._sortCriteria);
@@ -50,7 +50,7 @@ class TodoList {
               } else if (todo.dringlichkeit == "3"){
                 ulTodoHeader.style="background-color: #3BBF4C"
               } else{
-                // nicht einfärben
+                // not highlight
               }
               ulTodoHeader.className = "todoheader";
                 var liPerson = document.createElement("LI");
@@ -63,30 +63,30 @@ class TodoList {
               ulTodoHeader.appendChild(liTitle);
               var ulTodoFooter = document.createElement("UL");
               ulTodoFooter.className = "todofooter";
-                var liZeit = document.createElement("LI");
-                var liZeitText = document.createTextNode(todo.datum);
-                liZeit.appendChild(liZeitText);
-              ulTodoFooter.appendChild(liZeit);
-                var liBeschreibung = document.createElement("LI");
-                var liBeschreibungText = document.createTextNode(todo.beschreibung);
-                liBeschreibung.appendChild(liBeschreibungText);
-              ulTodoFooter.appendChild(liBeschreibung);
+                var liTime = document.createElement("LI");
+                var liTimeText = document.createTextNode(todo.datum);
+                liTime.appendChild(liTimeText);
+              ulTodoFooter.appendChild(liTime);
+                var liDescription = document.createElement("LI");
+                var liDescriptionText = document.createTextNode(todo.beschreibung);
+                liDescription.appendChild(liDescriptionText);
+              ulTodoFooter.appendChild(liDescription);
             divTodoBox.appendChild(ulTodoHeader);
             divTodoBox.appendChild(ulTodoFooter);
-            liste.appendChild(divTodoBox);
+            list.appendChild(divTodoBox);
         });
-        // Buttons hinzufügen
+        // add buttons
         var headerElements = document.getElementsByClassName("todoheader");
         for (var i = 0; i < headerElements.length; i++) {
           let index = i;
-          // Lösch button
-          var löschButton = document.createElement("SPAN");
-          var löschText = document.createTextNode("\u00D7");
-          löschButton.className = "close";
-          löschButton.appendChild(löschText);
-          löschButton.addEventListener("click", () => this._askDelete(0 + index));
-          headerElements[i].appendChild(löschButton);
-          // Update button
+          // delete button
+          var deleteButton = document.createElement("SPAN");
+          var deleteText = document.createTextNode("\u00D7");
+          deleteButton.className = "close";
+          deleteButton.appendChild(deleteText);
+          deleteButton.addEventListener("click", () => this._askDelete(0 + index));
+          headerElements[i].appendChild(deleteButton);
+          // update button
           var updateButton = document.createElement("SPAN");
           var updateText = document.createTextNode("\u270E");
           updateButton.className = "close";
@@ -97,50 +97,50 @@ class TodoList {
     }
 
     _askDelete(index) {
-        // Nochmals nachfragen
+        //ask again
         let answer = confirm("Soll die ausgewählte Aufgabe wirklich gelöscht werden?");
         if (!answer) return;
 
-        // Datensatz löschen
+        //delete dataset
         this._app.deleteTodoByIndex(index);
 
-        // Liste neu ausgeben
+        //output list again
         this._renderList();
     }
 
     _askUpdate(index) {
-      // Nochmals nachfragen
+      //ask again
       let answer = confirm("Soll die ausgewählte Aufgabe wirklich bearbeitet werden?");
       if (!answer) return;
 
-      // Datensatz bearbeiten
+      //edit dataset
       this._app.showPage("aufgabe-bearbeiten", index)
 
-      // Liste neu ausgeben
+      //output list again
       this._renderList();
     }
 
-    _filtere(){
-      let eingabe = this._filterBar.value.toUpperCase();
-      let filterWerte = eingabe.split(/[ ,]+/); // Bei EIngabe von "Test blub" werden Einträge gesucht, die sowohl "Test" wie auch "blub" enthalten
+    _filter(){
+      let input = this._filterBar.value.toUpperCase();
+      let filterValues = input.split(/[ ,]+/);
 
-      let elemente = document.getElementById("aufgabenliste").getElementsByClassName("todobox");
-      let listenIndex, filterWerteIndex;
+      let element = document.getElementById("aufgabenliste").getElementsByClassName("todobox");
+      let listIndex, filterValueIndex;
 
-      for (listenIndex = 0; listenIndex < elemente.length; listenIndex++) {
-        let elementText = elemente[listenIndex].innerText.toUpperCase();
-        elemente[listenIndex].style.display = "";
-        for (filterWerteIndex = 0; filterWerteIndex < filterWerte.length; filterWerteIndex++) {
-          if (!elementText.includes(filterWerte[filterWerteIndex])){
-            // Element wird rausgefiltert
-            elemente[listenIndex].style.display = "none";
+      for (listIndex = 0; listIndex < element.length; listIndex++) {
+        let elementText = element[listIndex].innerText.toUpperCase();
+        element[listIndex].style.display = "";
+        for (filterValueIndex = 0; filterValueIndex < filterValues.length; filterValueIndex++) {
+          if (!elementText.includes(filterValues[filterValueIndex])){
+            // hide element
+            element[listIndex].style.display = "none";
             break;
           }
         }
       }
     }
 
-    _sortiere(){
+    _sort(){
       this._sortCriteria = (this._sortCriteria + 1) % 4;
       if (this._sortCriteria == 0) {
         this._sortButton.innerHTML = "Dringlichkeit absteigend";
@@ -152,6 +152,6 @@ class TodoList {
         this._sortButton.innerHTML = "Datum aufsteigend";
       }
       this._renderList();
-      this._filtere();
+      this._filter();
     }
 }

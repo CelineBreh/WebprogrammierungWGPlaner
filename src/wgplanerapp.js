@@ -166,8 +166,8 @@ class WGPlanerApp {
         if (criteria == 0 || criteria == 1) {
           comparison = this2.compareNumbers(a.dringlichkeit, b.dringlichkeit);
         }
-        else if(criteria == 2 || kriterium == 3) {
-          comparison = this2.compareNumbers(a.datum, b.datum);
+        else if(criteria == 2 || criteria == 3) {
+          comparison = this2.compareNumbers(new Date(a.datum).getTime(), new Date(b.datum).getTime());
         }
         if (criteria % 2 == 0){
           return comparison;
