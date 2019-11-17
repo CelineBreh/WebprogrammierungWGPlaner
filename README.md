@@ -4,15 +4,12 @@ Beispielanwendung "WebprogrammierungWGPlaner"
 Kurzbeschreibung
 ----------------
 
-Dies ist eine Browser App, die ohne einen eignen Server im Hintergrund auskommt und
-komplett im Browser läuft. Lediglich für die Persistierung wird Firebase verwendet. Bei der App handelt es sich
-um eine so genannte Single Page App, da die App nur einmal durch
-Aufrufen der HTML-Datei gestartet werden kann und dann bis zum Verlassen der
-App nicht wieder neugeladen wird. Das bedeutet eine Single Page App besteht nur aus einem einzigen HTML-Dokument, 
-wobei deren Inhalte dynamisch nachgeladen werden.
+Dies ist eine Browser-App, die ohne einen eignen Server im Hintergrund auskommt und
+komplett im Browser läuft. Lediglich für die Persistierung der Todos wird Firebase verwendet. Bei der App handelt es sich
+um eine so genannte Single Page App. Das heißt, dass die Seiten beim Navigieren durch die Anwendung nicht neugeladen werden müssen, sondern einfach nur deren Inhalte dynamisch nachgeladen werden.
 
-
-
+Starten der Anwendung
+----------------
 Um die Anwendung zu starten muss das ganze Projekt heruntergeladen oder geclont werden. Anschließend muss lediglich die index.html in einem Browser geöffent werden.
 
 
