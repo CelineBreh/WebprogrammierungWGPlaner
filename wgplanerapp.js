@@ -1,36 +1,36 @@
 "use strict"
 
-import DB from "./database.js";
-
-
-
 class WGPlanerApp {
     constructor(pages, router) {
-        this._pages = pages;
-        this._currentPageObject = null;
-        this.router = router;
-        this._db = new DB();
+      this._pages = pages;
+      this._currentPageObject = null;
+      this.router = router;
+  		// firebase
+      let config = {
+        apiKey: "AIzaSyCa4KCqrAgIY6lsD3OMVFaI1ExE7VsOzHQ",
+    		authDomain: "webprogrammierungwgplaner.firebaseapp.com",
+    		databaseURL: "https://webprogrammierungwgplaner.firebaseio.com",
+    		projectId: "webprogrammierungwgplaner",
+    		storageBucket: "webprogrammierungwgplaner.appspot.com",
+    		messagingSenderId: "267987225836",
+    		appId: "1:267987225836:web:1f4c002e59aa8acc0829c9",
+    		measurementId: "G-DV9E5J3ZFS"
+      };
 
-        let browserCache = localStorage['wgplaner-daten'];
-        if (browserCache) {
-          // Erfolgreiches Laden der Daten des Browsers
-          this._data = JSON.parse(browserCache);
-        }
-        else {
-          // Laden nicht erfolgreich, deshalb wird eine Beispielsaufgabe erstellt
-          this._data = [
-             {
-                 aufgabe: "Küche putzen",
-                 beschreibung: "Bitte Geschirrspülmaschine einräumen und Kühlschrank ausräumen",
-                 zustaendig: "Selina",
-                 dringlichkeit: "1",
-                 datum: new Date("1995-12-17T03:24:00")
-             }
-           ];
-        }
+      firebase.initializeApp(config);
+      this.database = firebase.database();
 
-        // Interne Methode zum Rendern des Menüs aufrufen
-        this._renderMenu();
+      let app = this;
+      let ref = this.database.ref('aufgaben/');
+      ref.on("value", function(snapshot) {
+        app.aufgaben = snapshot.val();
+        // Jetzt wo die Daten geladen sind, kann geroutet werden
+        router.resolve();
+      }, function (error) {
+         console.log("Error: " + error.code);
+      });
+      // Interne Methode zum Rendern des Menüs aufrufen
+      this._renderMenu();
     }
 
     /**
@@ -110,7 +110,7 @@ class WGPlanerApp {
      * @return {Array} Array mit allen Datenobjekten
      */
     getData() {
-        return this._data;
+        return this.aufgaben;
     }
 
     /**
@@ -121,7 +121,7 @@ class WGPlanerApp {
      * @return {Object} Gewünschter Datensatz oder undefined
      */
     getDataByIndex(index) {
-        return this._data[index];
+        return this.aufgaben[index];
     }
 
     /**
@@ -133,8 +133,8 @@ class WGPlanerApp {
      * @param {Object} dataset Neue Daten des Datensatzes
      */
     updateDataByIndex(index, dataset) {
-        this._data[index] = dataset;
-        localStorage['wgplaner-daten'] = JSON.stringify(this._data);
+        this.aufgaben[index] = dataset;
+        this.persistData();
     }
 
     /**
@@ -144,14 +144,8 @@ class WGPlanerApp {
      * @param {[type]} index Index des zu löschenden Datensatzes
      */
     deleteDataByIndex(index) {
-        this._data.splice(index, 1);
-        localStorage['wgplaner-daten'] = JSON.stringify(this._data);
-        this._db.deleteAufgabe(index).then(function() {
-          console.log("Rezept " + index + "gelöscht");
-          location.reload();
-        }).catch(function(error) {
-          console.error("Error beim löschen von: ", error);
-        });
+        this.aufgaben.splice(index, 1);
+        this.persistData();
     }
 
     /**
@@ -161,9 +155,9 @@ class WGPlanerApp {
      * @return {Integer} Index des neuen Datensatzes
      */
     appendData(dataset) {
-        this._data.push(dataset);
-        localStorage['wgplaner-daten'] = JSON.stringify(this._data);
-        return this._data.length - 1;
+        this.aufgaben.push(dataset);
+        this.persistData();
+        return this.aufgaben.length - 1;
     }
 
     _vergleichGröße(a, b) {
@@ -182,7 +176,7 @@ class WGPlanerApp {
      */
      sortData(kriterium){
        let this2 = this; // this ist nicht bekannt innerhalb von sort, darin muss aber auf this zugegriffen werden
-       this._data.sort( function(a, b) {
+       this.aufgaben.sort( function(a, b) {
         let vergleich;
         if (kriterium == 0 || kriterium == 1) {
           vergleich = this2._vergleichGröße(a.dringlichkeit, b.dringlichkeit);
@@ -196,5 +190,9 @@ class WGPlanerApp {
           return -1 * vergleich;
         }
       });
+     }
+
+     persistData(){
+       this.database.ref('aufgaben').set(this.aufgaben);
      }
 }

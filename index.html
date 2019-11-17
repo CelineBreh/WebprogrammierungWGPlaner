@@ -23,6 +23,11 @@
         <!-- Wird für das Routing benötigt -->
         <script src="node_modules/navigo/lib/navigo.js"></script>
 
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-database.js"></script>
+
         <script>
             window.addEventListener("load", () => {
                 let pages = [
@@ -51,6 +56,7 @@
                         hidden: false,
                     }
                 ];
+
                 // Navigo Router initialisieren
                 let router = new Navigo(null, true, '#!');
                 let app = new WGPlanerApp(pages, router);
@@ -59,21 +65,21 @@
                 {
                     '/einkaufsliste': function ()
                     {
-                        app.showPage("einkaufsliste", app._data.length);
+                        app.showPage("einkaufsliste", app.aufgaben.length);
                     },
                     '/aufgabe/:id': function ( parameter )
                     {
-                        app.showPage("aufgabe-bearbeiten", app._data[parameter.id] ? parameter.id : undefined );
+                        app.showPage("aufgabe-bearbeiten", app.aufgaben[parameter.id] ? parameter.id : undefined );
                     },
                     '/aufgaben': function ()
                     {
-                        app.showPage("aufgaben-liste", app._data.length);
+                        app.showPage("aufgaben-liste", app.aufgaben.length);
                     },
                     '*': function ()
                     {
-                        app.showPage("aufgaben-liste", app._data.length);
+                        app.showPage("aufgaben-liste", app.aufgaben.length);
                     }
-                }).resolve();
+                });
             });
         </script>
     </head>
@@ -83,17 +89,6 @@
         </ul>
       </header>
 
-      <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
-      <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-      <script src="/__/firebase/7.3.0/firebase-app.js"></script>
-
-      <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-      <script src="/__/firebase/7.3.0/firebase-analytics.js"></script>
-
-      <!-- Add Firebase products that you want to use -->
-      <script src="/__/firebase/7.3.0/firebase-auth.js"></script>
-      <script src="/__/firebase/7.3.0/firebase-firestore.js"></script>
     </body>
     <html>
         <!-- Navigationsleiste -->
@@ -129,24 +124,11 @@
         <template id="vorlage-aufgabe-bearbeiten">
             <div>
                 <div class="form">
-                  <input  type="text" class="aufgabe" placeholder="Aufgabe" value="$AUFGABE$" list="auftrag">
-                    <datalist id= "auftrag">
-                       <option value="Bad putzen"/>
-                       <option value="Geschirrspülmaschine ausräumen"/>
-                       <option value="Kochen"/>
-                       <option value="Küche putzen"/>
-                       <option value="Kühlschrank aussortieren"/>
-                       <option value="Rasenmähen"/>
-                       <option value="Staubsaugen"/>
-                       <option value="Wäsche aufhängen"/>
-                       <option value="Wohnzimmer aufräumen"/>
-                       <option value="Wohnzimmer putzen"/>
-                     </datalist>
-                   </input>
+                    <input class="aufgabe" placeholder="Aufgabe" value="$AUFGABE$" />
                     <input class="beschreibung" placeholder="Beschreibung" value="$BESCHREIBUNG$" />
                     <input class="zustaendig" placeholder="Zuständig" value="$ZUSTAENDIG$" />
-                    <input class="dringlichkeit" placeholder="Dringlichkeit von 1 bis 3" value="$DRINGLICHKEIT$" />
-                    <input class="datum" type="date"  min="2019-11-18" max="2060-12-31"value="$DATUM$" />
+                    <input class="dringlichkeit" placeholder="Dringlichkeit" value="$DRINGLICHKEIT$" />
+                    <input class="datum" placeholder="Erledigen bis" value="$DATUM$" />
                 </div>
                 <div class="actions">
                     <div class="action save">
