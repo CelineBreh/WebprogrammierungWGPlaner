@@ -10,12 +10,12 @@ class TodoList {
         this._app = app;
         this._mainElement = document.getElementById("vorlage-aufgaben-liste");
 
-        this._filterBar = document.getElementById("filterKriterium");
+        this._filterBar = document.getElementById("filterbar");
         this._filterBar.addEventListener('keyup', () => this._filtere());
 
-        this._sortierButton = document.getElementById("sortierButton");
-        this._sortierKriterium = 0; // 0 -> dringlichkeit absteigend
-        this._sortierButton.addEventListener('click', () => this._sortiere());
+        this._sortButton = document.getElementById("sortButton");
+        this._sortCriteria = 0; // 0 -> dringlichkeit absteigend
+        this._sortButton.addEventListener('click', () => this._sortiere());
     }
 
     show() {
@@ -37,7 +37,7 @@ class TodoList {
             liste.innerHTML = template;
             return;
         }
-        this._app.sortTodos(this._sortierKriterium);
+        this._app.sortTodos(this._sortCriteria);
 
         todos.forEach(todo => {
             var divTodoBox = document.createElement("LI");
@@ -141,15 +141,15 @@ class TodoList {
     }
 
     _sortiere(){
-      this._sortierKriterium = (this._sortierKriterium + 1) % 4;
-      if (this._sortierKriterium == 0) {
-        this._sortierButton.innerHTML = "Dringlichkeit absteigend";
-      } else if (this._sortierKriterium == 1) {
-        this._sortierButton.innerHTML = "Dringlichkeit aufsteigend";
-      } else if (this._sortierKriterium == 2) {
-        this._sortierButton.innerHTML = "Datum absteigend";
-      } else if (this._sortierKriterium == 3) {
-        this._sortierButton.innerHTML = "Datum aufsteigend";
+      this._sortCriteria = (this._sortCriteria + 1) % 4;
+      if (this._sortCriteria == 0) {
+        this._sortButton.innerHTML = "Dringlichkeit absteigend";
+      } else if (this._sortCriteria == 1) {
+        this._sortButton.innerHTML = "Dringlichkeit aufsteigend";
+      } else if (this._sortCriteria == 2) {
+        this._sortButton.innerHTML = "Datum absteigend";
+      } else if (this._sortCriteria == 3) {
+        this._sortButton.innerHTML = "Datum aufsteigend";
       }
       this._renderList();
       this._filtere();

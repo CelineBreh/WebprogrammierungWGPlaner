@@ -4,21 +4,22 @@ Beispielanwendung "WebprogrammierungWGPlaner"
 Kurzbeschreibung
 ----------------
 
-Dies ist eine Browser App, die ohne einen Server im Hintergrund 
-komplett im Browser läuft. Es handelt sich dabei
+Dies ist eine Browser App, die ohne einen eignen Server im Hintergrund auskommt und
+komplett im Browser läuft. Lediglich für die Persistierung wird firebase verwendet. Bei der App handelt es sich
 um eine so genannte Single Page App, da die App nur einmal durch
-Aufrufen der HTML-Datei gestartet und dann bis zum Verlassen der
-App nicht wieder neugeladen wird.
+Aufrufen der HTML-Datei gestartet werden kann und dann bis zum Verlassen der
+App nicht wieder neugeladen wird. //Definition von spa hinzufügen
 
 Die Anwendung kann an folgender Stelle online betrachtet werden:
 file:///C:/Users/BREHCE/Desktop/WGPlaner/WebprogrammierungWGPlaner/index.html
-
+// falsch, das ist verweis auf eine lokale datei, auf die nur du zugreifen kannst
+// eher sowas wie clone das projekt und öffne die index.html im browser bzw node start
 Verwendete Technologien
 -----------------------
 
-Die App nutzt den Node Package Manager npm als Paketverwaltung. Auf diese
+Die App nutzt den Node Package Manager npm zur Paketverwaltung. Auf diese
 Weise werden der Application Bundler ParcelJS sowie eine Hand voll externe
-Bibliotheken für die Anwendung installiert. Jedoch wird kein übergreifendes
+Bibliotheken für die Anwendung installiert. So zum Beispiel das für das Routing verwendete Navigo.js. Jedoch wird kein übergreifendes
 Framework wie Angular oder React verwendet, da diese für eine allgemeine
 Einführung zu speziell sind und viele wesentliche Details verbergen.
 
@@ -38,7 +39,7 @@ Zusätzlich werden folgende Bibliotheken genutzt:
 UI-Skizzen und Screenshots
 --------------------------
 
-
+// Diese Bilder existieren überhaupt nicht?:)
 <table style="max-width: 100%;">
     <tr>
         <td>
@@ -78,5 +79,6 @@ Dieses Projekt ist lizenziert unter
 
 © 2019 Sazin Ali, Selina Pfeifer, Celine Breh <br/>
 
-E-Mail: [sazeenali85@gmail.com][selina1.pfeifer@web.de] [celine.breh@web.de](mailto:selina1.pfeifer@web.de) <br/>
+E-Mail: [sazeenali85@gmail.com][selina1.pfeifer@web.de] [celine.breh@web.de] <br/>
 Webseite: file:///C:/Users/BREHCE/Desktop/WGPlaner/WebprogrammierungWGPlaner/index.html
+//Gleiches wie oben, der link ist nur für dich sichtbar
