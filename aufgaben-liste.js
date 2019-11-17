@@ -33,7 +33,7 @@ class AufgabenListe {
         let liste = document.querySelector("#vorlage-aufgaben-liste > ul");
         liste.innerHTML = "";
 
-        let data = this._app.getData();
+        let data = this._app.getTodos();
         if (data.length < 1) {
             let template = document.getElementById("vorlage-aufgaben-liste-leer").innerHTML;
             liste.innerHTML = template;

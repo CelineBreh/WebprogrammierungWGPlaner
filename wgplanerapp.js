@@ -5,7 +5,8 @@ class WGPlanerApp {
       this._pages = pages;
       this._currentPageObject = null;
       this.router = router;
-  		// firebase
+
+  		// firebase configuration file
       let config = {
         apiKey: "AIzaSyCa4KCqrAgIY6lsD3OMVFaI1ExE7VsOzHQ",
     		authDomain: "webprogrammierungwgplaner.firebaseapp.com",
@@ -16,71 +17,68 @@ class WGPlanerApp {
     		appId: "1:267987225836:web:1f4c002e59aa8acc0829c9",
     		measurementId: "G-DV9E5J3ZFS"
       };
-
+      // get firebase database instance
       firebase.initializeApp(config);
       this.database = firebase.database();
 
-      let app = this;
+      let app = this; // "this" needs to be accessed inside ref.on
       let ref = this.database.ref('aufgaben/');
       ref.on("value", function(snapshot) {
-        app.aufgaben = snapshot.val();
-        // Jetzt wo die Daten geladen sind, kann geroutet werden
+        app.todos = snapshot.val();
+        // As the todos are now loaded, resolving the route is now possible
         router.resolve();
       }, function (error) {
+         // Firebase data could not be loaded
+         app.todos = [];
          console.log("Error: " + error.code);
+         router.resolve();
       });
-      // Interne Methode zum Rendern des Menüs aufrufen
-      this._renderMenu();
+      this.renderMenu();
     }
 
-    /**
-     * Tablaschen zum Umschalten der aktuellen Seite anzeigen. (Interne Methode)
-     */
-    _renderMenu() {
+    // Render the menu / navigation panel
+    renderMenu() {
       let ul = document.querySelector("#wgplanerapp-header > ul");
       let template = document.getElementById("vorlage-wgplanerapp-menu-li").innerHTML;
 
       this._pages.forEach(page => {
-          // Versteckte Seiten überspringen
+          // Skip hidden pages
           if (page.hidden) return;
 
-          // Neues Element auf Basis des Templates erzeugen
           let dummy = document.createElement("ul");
           dummy.innerHTML = template;
           dummy.innerHTML = dummy.innerHTML.replace("$NAME$", page.name);
           dummy.innerHTML = dummy.innerHTML.replace("$LABEL$", page.label);
 
-          // Event Listener auf das <li>-Element registrieren
           let li = dummy.firstElementChild;
           li.addEventListener("click", () => this.showPage(page.name));
 
-          // Element nun in das Menü umhängen
           dummy.removeChild(li);
           ul.appendChild(li);
       });
     }
 
     /**
-     * Umschalten der sichtbaren Seite.
+     * Switch the visible page
      *
-     * @param  {String} name Name der anzuzeigenden Seite, gemäß this.pages
-     * @param  {Integer} editIndex Nummer des bearbeiteten Datensatzes (optional)
+     * @param  {String} name name of the visible pages according to this.pages
+     * @param  {Integer} editIndex index of the element to edit
      */
     showPage(name, editIndex) {
-        // Gewünschte Seite suchen
+        // Find matching page
         let newPage = this._pages.find(p => p.name === name);
 
         if (newPage === undefined) {
-            console.error(`Klasse App, Methode showPage(): Ungültige Seite „${name}”`);
+            console.error(`No page with „${name}” exists`);
             return;
         }
 
-        // Aktuelle Seite ausblenden
+        // Hide current page
         if (this._currentPageObject != null) {
             this._currentPageObject.hide();
         }
 
-        // Neue Seite anzeigen und merken
+        // Show new page
         this._currentPageObject = new newPage.klass(this, name, editIndex);
         this._currentPageObject.show();
 
@@ -95,45 +93,40 @@ class WGPlanerApp {
         }
         else if (name === "einkaufsliste"){
           this.router.navigate('/einkaufsliste');
-        } else{
-          alert("error");
         }
 
-        // Aktuelle Seite im Kopfbereich hervorheben
+        // Highlight the current shown page inside the menu/ navigation panel
         document.querySelectorAll("#wgplanerapp-header li").forEach(li => li.classList.remove("active"));
         document.querySelectorAll(`#wgplanerapp-header li[data-page-name="${name}"]`).forEach(li => li.classList.add("active"));
     }
 
 
     /**
-     * Gibt die komplette Liste mit allen Daten zurück.
-     * @return {Array} Array mit allen Datenobjekten
+     * Returns an array of all todos.
+     * @return {Array} array of all todos
      */
-    getData() {
-        return this.aufgaben;
+    getTodos() {
+        return this.todos;
     }
 
     /**
-     * Gibt den Datensatz mit dem übergebenen Index zurück. Kann der Datensatz
-     * nicht gefunden werden, wird undefined zurückgegeben.
+     * Returns the todo with the matching index
      *
-     * @param  {Integer} index Index des gewünschten Datensatzes
-     * @return {Object} Gewünschter Datensatz oder undefined
+     * @param  {Integer} index index of the requested todo
+     * @return {Object} the requested todo or undefined if index in not valid (e.g. negative)
      */
-    getDataByIndex(index) {
-        return this.aufgaben[index];
+    getTodoByIndex(index) {
+        return this.todos[index];
     }
 
     /**
-     * Aktualisiert den Datensatz mit dem übergebenen Index und überschreibt
-     * ihn mit dem ebenfalls übergebenen Objekt. Der Datensatz muss hierfür
-     * bereits vorhanden sein.
+     * Updates
      *
      * @param {Integer} index Index des zu aktualisierenden Datensatzes
      * @param {Object} dataset Neue Daten des Datensatzes
      */
     updateDataByIndex(index, dataset) {
-        this.aufgaben[index] = dataset;
+        this.todos[index] = dataset;
         this.persistData();
     }
 
@@ -144,7 +137,7 @@ class WGPlanerApp {
      * @param {[type]} index Index des zu löschenden Datensatzes
      */
     deleteDataByIndex(index) {
-        this.aufgaben.splice(index, 1);
+        this.todos.splice(index, 1);
         this.persistData();
     }
 
@@ -155,7 +148,7 @@ class WGPlanerApp {
      * @return {Integer} Index des neuen Datensatzes
      */
     appendData(dataset) {
-        this.aufgaben.push(dataset);
+        this.todos.push(dataset);
         this.persistData();
         return this.aufgaben.length - 1;
     }
@@ -176,7 +169,7 @@ class WGPlanerApp {
      */
      sortData(kriterium){
        let this2 = this; // this ist nicht bekannt innerhalb von sort, darin muss aber auf this zugegriffen werden
-       this.aufgaben.sort( function(a, b) {
+       this.todos.sort( function(a, b) {
         let vergleich;
         if (kriterium == 0 || kriterium == 1) {
           vergleich = this2._vergleichGröße(a.dringlichkeit, b.dringlichkeit);
@@ -193,6 +186,7 @@ class WGPlanerApp {
      }
 
      persistData(){
-       this.database.ref('aufgaben').set(this.aufgaben);
+       this.database.ref('todos').set(this.aufgaben);
+              this.database.ref('aufgaben').set(this.aufgaben);
      }
 }

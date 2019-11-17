@@ -33,7 +33,7 @@ class AufgabeAnlegen {
         };
 
         if (this._editIndex > -1) {
-            let dataset = this._app.getDataByIndex(this._editIndex);
+            let dataset = this._app.getTodoByIndex(this._editIndex);
 
             this._dataset.aufgabe = dataset.aufgabe;
             this._dataset.beschreibung = dataset.beschreibung;

@@ -65,19 +65,19 @@
                 {
                     '/einkaufsliste': function ()
                     {
-                        app.showPage("einkaufsliste", app.aufgaben.length);
+                        app.showPage("einkaufsliste", app.todos.length);
                     },
                     '/aufgabe/:id': function ( parameter )
                     {
-                        app.showPage("aufgabe-bearbeiten", app.aufgaben[parameter.id] ? parameter.id : undefined );
+                        app.showPage("aufgabe-bearbeiten", app.todos[parameter.id] ? parameter.id : undefined );
                     },
                     '/aufgaben': function ()
                     {
-                        app.showPage("aufgaben-liste", app.aufgaben.length);
+                        app.showPage("aufgaben-liste", 0);
                     },
                     '*': function ()
                     {
-                        app.showPage("aufgaben-liste", app.aufgaben.length);
+                        app.showPage("aufgaben-liste", 0);
                     }
                 });
             });
