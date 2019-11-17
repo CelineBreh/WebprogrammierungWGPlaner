@@ -12,11 +12,10 @@ App nicht wieder neugeladen wird. Das bedeutet eine Single Page App besteht nur 
 wobei deren Inhalte dynamisch nachgeladen werden.
 
 
-<<<<<<< HEAD
 =======
 Um die Anwendung zu starten muss das ganze Projekt heruntergeladen oder geclont werden. Anschließend muss lediglich die index.html in einem Browser geöffent werden.
 
->>>>>>> 28aeced0112cec5ab0acae649d4dd6c50f86ab17
+
 Verwendete Technologien
 -----------------------
 
