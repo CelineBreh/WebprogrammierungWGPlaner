@@ -1,6 +1,6 @@
 "use strict";
 /**
-* Klasse Einkaufsliste: Stellt eine bearbeitbare Einkaufsliste dar
+* class Einkaufsliste: is an edited grocery list
 */
 
 let counter = 0;
@@ -22,7 +22,7 @@ class Einkaufsliste {
   }
 
   _renderList() {
-    // todo wie in anderen js dateien html erzeugen und einfügen
+    // todo similar to the other js files
     document.getElementById("addBtn").addEventListener('click', () => {
       add();
     });
@@ -55,16 +55,14 @@ let add = () => {
 
   if (inputValue === '') {
    alert("Du musst ein Lebensmitel hinzufügen!");
+   return;
 } else {
    label.appendChild(checkbox);
    document.getElementById("list").appendChild(label);
-
-
      addRemoveBtn(label, checkbox);
-       addCrossStyle(label, checkbox);
+     addCrossStyle(label, checkbox);
      myInput.value="";
-}
-
+   }
 }
 
 let addRemoveBtn=(li, ch)=>  {
@@ -76,8 +74,8 @@ let addRemoveBtn=(li, ch)=>  {
 
   //remove task function
   removeTask.addEventListener("click", function () {
-    li.parentNode.removeChild(li);
-    ch.parentNode.removeChild(ch);
+  li.parentNode.removeChild(li);
+  ch.parentNode.removeChild(ch);
 
 
   }, false);
