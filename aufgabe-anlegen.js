@@ -107,9 +107,9 @@ class AufgabeAnlegen {
         this._dataset.datum = datum;
 
         if (this._editIndex > -1) {
-            this._app.updateDataByIndex(this._editIndex, this._dataset);
+            this._app.updateTodoByIndex(this._editIndex, this._dataset);
         } else {
-            this._app.appendData(this._dataset);
+            this._app.appendTodo(this._dataset);
         }
         // Zurück zur Übersicht
         this._app.showPage("aufgaben-liste");

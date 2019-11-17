@@ -22,7 +22,7 @@ class WGPlanerApp {
       this.database = firebase.database();
 
       let app = this; // "this" needs to be accessed inside ref.on
-      let ref = this.database.ref('aufgaben/');
+      let ref = this.database.ref('todos/');
       ref.on("value", function(snapshot) {
         app.todos = snapshot.val();
         // As the todos are now loaded, resolving the route is now possible
@@ -120,73 +120,70 @@ class WGPlanerApp {
     }
 
     /**
-     * Updates
+     * Updates a specific todo
      *
-     * @param {Integer} index Index des zu aktualisierenden Datensatzes
-     * @param {Object} dataset Neue Daten des Datensatzes
+     * @param {Integer} index index of the todo which shall be updated
+     * @param {Object} todo new version of todo
      */
-    updateDataByIndex(index, dataset) {
-        this.todos[index] = dataset;
+    updateTodoByIndex(index, todo) {
+        this.todos[index] = todo;
         this.persistData();
     }
 
     /**
-     * Löscht den Datensatz mit dem übergebenen Index. Alle anderen Datensätze
-     * rücken dadurch eins vor.
-     *
-     * @param {[type]} index Index des zu löschenden Datensatzes
+     * Deletes a specific todo
+
+     * @param {[type]} index index of the todo to delete
      */
-    deleteDataByIndex(index) {
+    deleteTodoByIndex(index) {
         this.todos.splice(index, 1);
         this.persistData();
     }
 
     /**
-     * Fügt einen neuen Datensatz am Ende der Liste hinzu.
+     * Inserts a todo
      *
-     * @param  {Object} dataset Neu anzuhängender Datensatz
-     * @return {Integer} Index des neuen Datensatzes
+     * @param  {Object} todo todo to add
+     * @return {Integer} index of the new todo
      */
-    appendData(dataset) {
-        this.todos.push(dataset);
+    appendTodo(todo) {
+        this.todos.push(todo);
         this.persistData();
-        return this.aufgaben.length - 1;
-    }
-
-    _vergleichGröße(a, b) {
-      if(a > b) return -1;
-      if(a < b) return 1;
-      return 0;
+        return this.todos.length - 1;
     }
 
     /**
-     * Sortiert die Daten anhand des übergebenen Sortierkriteriums
-     *
-     * @param  {int} kriterium 0 -> dringlichkeit absteigend
+     * Sorts the todos depending on the passed search criteria
+     * @param  {int} criteria 0 -> dringlichkeit absteigend
      *                         1 -> dringlichkeit aufsteigend
      *                         2 -> datum absteigend
      *                         3 -> datum aufsteigend
      */
-     sortData(kriterium){
-       let this2 = this; // this ist nicht bekannt innerhalb von sort, darin muss aber auf this zugegriffen werden
+     sortTodos(criteria){
+       let this2 = this; // this is not none onside .sort(), but can so be accessed by this2
        this.todos.sort( function(a, b) {
-        let vergleich;
-        if (kriterium == 0 || kriterium == 1) {
-          vergleich = this2._vergleichGröße(a.dringlichkeit, b.dringlichkeit);
+        let comparison;
+        if (criteria == 0 || criteria == 1) {
+          comparison = this2.compareNumbers(a.dringlichkeit, b.dringlichkeit);
         }
-        else if(kriterium == 2 || kriterium == 3) {
-          vergleich = this2._vergleichGröße(a.datum, b.datum);
+        else if(criteria == 2 || kriterium == 3) {
+          comparison = this2.compareNumbers(a.datum, b.datum);
         }
-        if (kriterium % 2 == 0){
-          return vergleich;
+        if (criteria % 2 == 0){
+          return comparison;
         } else {
-          return -1 * vergleich;
+          return -1 * comparison;
         }
       });
      }
 
+     compareNumbers(a, b) {
+       if(a > b) return -1;
+       if(a < b) return 1;
+       return 0;
+     }
+
      persistData(){
-       this.database.ref('todos').set(this.aufgaben);
-              this.database.ref('aufgaben').set(this.aufgaben);
+       this.database.ref('todos').set(this.todos);
      }
 }

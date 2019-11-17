@@ -1,10 +1,10 @@
 "use strict";
 
 /**
- * Klasse AufgabenListe: Listet alle Aufgaben auf
+ * Class TodoList: Lists all todos
  */
 
-class AufgabenListe {
+class TodoList {
 
     constructor(app) {
         this._app = app;
@@ -19,7 +19,6 @@ class AufgabenListe {
     }
 
     show() {
-        //_db.getAllAufgaben().then(function(querySnapshot)
         this._renderList();
         this._mainElement.classList.remove("hidden");
     }
@@ -29,48 +28,47 @@ class AufgabenListe {
     }
 
     _renderList() {
-        // Alte Einträge verwerfen
         let liste = document.querySelector("#vorlage-aufgaben-liste > ul");
         liste.innerHTML = "";
 
-        let data = this._app.getTodos();
-        if (data.length < 1) {
+        let todos = this._app.getTodos();
+        if (todos.length < 1) {
             let template = document.getElementById("vorlage-aufgaben-liste-leer").innerHTML;
             liste.innerHTML = template;
             return;
         }
-        this._app.sortData(this._sortierKriterium);
+        this._app.sortTodos(this._sortierKriterium);
 
-        data.forEach(dataset => {
+        todos.forEach(todo => {
             var divTodoBox = document.createElement("LI");
             divTodoBox.className = "todobox";
               var ulTodoHeader = document.createElement("UL");
-              if (dataset.dringlichkeit == "1"){
+              if (todo.dringlichkeit == "1"){
                 ulTodoHeader.style="background-color: #FF2035"
-              } else if (dataset.dringlichkeit == "2"){
+              } else if (todo.dringlichkeit == "2"){
                 ulTodoHeader.style="background-color: #FF8B07"
-              } else if (dataset.dringlichkeit == "3"){
+              } else if (todo.dringlichkeit == "3"){
                 ulTodoHeader.style="background-color: #3BBF4C"
               } else{
                 // nicht einfärben
               }
               ulTodoHeader.className = "todoheader";
                 var liPerson = document.createElement("LI");
-                var liPersonText = document.createTextNode(dataset.zustaendig+ ":");
+                var liPersonText = document.createTextNode(todo.zustaendig+ ":");
                 liPerson.appendChild(liPersonText);
               ulTodoHeader.appendChild(liPerson);
                 var liTitle = document.createElement("LI");
-                var liTitleText = document.createTextNode(dataset.aufgabe);
+                var liTitleText = document.createTextNode(todo.aufgabe);
                 liTitle.appendChild(liTitleText);
               ulTodoHeader.appendChild(liTitle);
               var ulTodoFooter = document.createElement("UL");
               ulTodoFooter.className = "todofooter";
                 var liZeit = document.createElement("LI");
-                var liZeitText = document.createTextNode(dataset.datum);
+                var liZeitText = document.createTextNode(todo.datum);
                 liZeit.appendChild(liZeitText);
               ulTodoFooter.appendChild(liZeit);
                 var liBeschreibung = document.createElement("LI");
-                var liBeschreibungText = document.createTextNode(dataset.beschreibung);
+                var liBeschreibungText = document.createTextNode(todo.beschreibung);
                 liBeschreibung.appendChild(liBeschreibungText);
               ulTodoFooter.appendChild(liBeschreibung);
             divTodoBox.appendChild(ulTodoHeader);
@@ -104,7 +102,7 @@ class AufgabenListe {
         if (!answer) return;
 
         // Datensatz löschen
-        this._app.deleteDataByIndex(index);
+        this._app.deleteTodoByIndex(index);
 
         // Liste neu ausgeben
         this._renderList();
